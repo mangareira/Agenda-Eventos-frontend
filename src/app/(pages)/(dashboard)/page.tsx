@@ -1,19 +1,24 @@
 import { BannerPrimary } from "@/app/components/BannerPrimary";
 import { BannerSecondary } from "@/app/components/BannerSecondary";
+import { FetchWrapper } from "@/app/utils/FetchWrapper";
 import { categories } from "@/app/utils/categories";
 
-export default function DashBoard(){
+export default async function DashBoard(){
+    const response = await FetchWrapper("/events/main", 'GET')
+    const secondary = response.data.slice(1)
     return (
         <div className="container mx-auto ">
-            <BannerPrimary/>
+            <BannerPrimary events={response.data[0]}/>
             <div className="p-2 text-blue">
                 <p className="text-2xl font-medium">Eventos em Destaque</p>
                 <p className=" text-base font-light ">Se divirta com os principais eventos da Faculdade Unicentoma</p>
             </div>
             <div className=" grid grid-cols-3 gap-4 mb-4 ">
-                <BannerSecondary/>
-                <BannerSecondary/>
-                <BannerSecondary/>
+                {secondary.map((events: any, index: any) => (
+                    <div className="" key={index}>
+                        <BannerSecondary events={events}/>
+                    </div>
+                ))}
             </div>
             <div className="p-2 text-blue">
                 <p className="text-2xl font-medium">Navegue por tipo de evento</p>
