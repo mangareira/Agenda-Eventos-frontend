@@ -1,4 +1,4 @@
-import { ForwardRefRenderFunction, forwardRef } from "react"
+import { ChangeEvent, ForwardRefRenderFunction, forwardRef } from "react"
 
 
 interface IInput {
@@ -6,9 +6,11 @@ interface IInput {
     type: string
     title: string
     className? : string
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => void
+    value?: string
 }
 
-export const InputBase : ForwardRefRenderFunction<HTMLInputElement & HTMLTextAreaElement, IInput> = ({title, placeholder, type,className, ...rest}, ref) => {
+export const InputBase : ForwardRefRenderFunction<HTMLInputElement & HTMLTextAreaElement, IInput> = ({title, placeholder, type,className, onChange,value, ...rest}, ref) => {
     if(type === 'textarea') {
         return (
             <div className={`mb-4 text-blue font-medium ${className}`}>
@@ -19,7 +21,6 @@ export const InputBase : ForwardRefRenderFunction<HTMLInputElement & HTMLTextAre
                 placeholder={placeholder} 
                 rows={5}
                 ref={ref}
-                {...rest} 
             />
         </div>
         )
@@ -32,7 +33,9 @@ export const InputBase : ForwardRefRenderFunction<HTMLInputElement & HTMLTextAre
             <input className={`w-full px-6 py-[5px] bg-white rounded-lg border border-teal-400 `} 
                 type={type} 
                 placeholder={placeholder} 
-                ref={ref} 
+                ref={ref}
+                onChange={onChange} 
+                value={value}
                 {...rest} 
             />
         </div>
