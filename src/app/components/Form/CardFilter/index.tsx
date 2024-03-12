@@ -1,14 +1,15 @@
+import Link from "next/link"
 import { Button } from "../Button"
 
-export const CardFilter = (event: any) => {
-    const data = new Date(event.event.date)
-    const image = `http://localhost:3333/uploads/${event.event.banner}`
-    const address = event.event.formattedAddress.split('-') 
+export const CardFilter = ({event}: any) => {
+    const data = new Date(event.date)
+    const image = `http://localhost:3333/uploads/${event.banner}`
+    const address = event.formattedAddress.split('-') 
     return (
         <div className="rounded mb-6 ">
             <div className="w-full p-3 h-[150px] relative  rounded-3xl shadow rounded-b-none bg-cover bg-center" style={{backgroundImage: `url(${image})`}} >
                 <div className=" text-white absolute top-3">
-                    <p className="text-normal pb-1 font-bold">{event.event.title}</p>
+                    <p className="text-normal pb-1 font-bold">{event.title}</p>
                     <div className="flex">
                         <div className="mr-4  flex">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -39,7 +40,9 @@ export const CardFilter = (event: any) => {
             <div className="w-full p-3 relative bg-slate-200 rounded-3xl shadow rounded-t-none ">
                 <p className="text-sm text-black" >{event.description}</p>
                 <div className="flex justify-center w-2/5 mx-auto my-4">
-                    <Button title="Ver detalhes do evento"/>
+                    <Link href={`/event-details/${event._id}`} >
+                        <Button title="Ver detalhes do evento"/>
+                    </Link>
                 </div>
             </div>
         </div>

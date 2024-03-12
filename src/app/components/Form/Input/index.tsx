@@ -6,7 +6,7 @@ interface IInput {
     type: string
     title: string
     className? : string
-    onChange?: (e: ChangeEvent<HTMLInputElement>) => void
+    onChange?: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
     value?: string
 }
 
@@ -21,6 +21,9 @@ export const InputBase : ForwardRefRenderFunction<HTMLInputElement & HTMLTextAre
                 placeholder={placeholder} 
                 rows={5}
                 ref={ref}
+                onChange={onChange}
+                value={value}
+                {...rest}
             />
         </div>
         )

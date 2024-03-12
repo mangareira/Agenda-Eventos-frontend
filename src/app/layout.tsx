@@ -4,6 +4,8 @@ import "./globals.css";
 import { SideBar } from "./components/SideBar";
 import { NavBar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/ReactToastify.css'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +22,7 @@ export default function RootLayout({
   return (
     <html lang="pt">
       <body className={inter.className}>
+        <ToastContainer/>
         <SideBar/>
         <NavBar/>
         <div className="mb-8 mt-16 mr-14">

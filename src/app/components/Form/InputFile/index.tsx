@@ -1,35 +1,39 @@
-'use client'
+import React, { ChangeEvent, forwardRef, Ref, useState } from "react"
 
-import { url } from "inspector"
-import { ChangeEvent, useState } from "react"
+interface IImageProps {
+    onChange: (file: File) => void;
+}
 
-export const InputFile = () => {
-    const [file, setFile] = useState<File | null>(null)
-    const [preview, setPreview] = useState<String>('')
+export const InputFile = forwardRef((props: IImageProps, ref: Ref<HTMLInputElement>) => {
+    const [preview, setPreview] = useState<string>('');
+
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const image = e.target.files?.[0] || null
-        setFile(image)
-        if(image) {
-            const reader = new FileReader()
-            reader.onloadend = (e) => {
-                const base64String = e.target?.result
-                setPreview(base64String as String)
-            }
-            reader.readAsDataURL(image)
+        const image = e.target.files?.[0];
+        if (image) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const base64String = reader.result as string;
+                setPreview(base64String);
+            };
+            reader.readAsDataURL(image);
+            props.onChange(image);
         }
-    }
+    };
+
     return (
         <>
-            {file ? (
+            {preview ? (
                 <div className="w-full h-full cursor-pointer bg-cover bg-center rounded-3xl" 
-                style={{backgroundImage: `url(${preview})`}}></div>
-            ): (
+                    style={{backgroundImage: `url(${preview})`}}
+                ></div>
+            ) : (
                 <input 
-                type="file" 
-                className="block w-full h-full opacity-0 cursor-pointer rounded-3xl"
-                onChange={handleChange}
+                    type="file" 
+                    className="block w-full h-full opacity-0 cursor-pointer rounded-3xl"
+                    onChange={handleChange}
+                    ref={ref}
                 />
             )}
         </>
-    )
-}
+    );
+});

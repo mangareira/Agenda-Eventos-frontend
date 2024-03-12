@@ -4,7 +4,7 @@ import { FetchWrapper } from "@/app/utils/FetchWrapper";
 import { categories } from "@/app/utils/categories";
 
 export default async function DashBoard(){
-    const response = await FetchWrapper("/events/main", 'GET')
+    const response = await FetchWrapper("/events/main", 'GET')    
     const secondary = response.data.slice(1)
     return (
         <div className="container mx-auto ">
