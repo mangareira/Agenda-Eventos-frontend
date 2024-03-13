@@ -1,10 +1,8 @@
 'use client'
 
-import { useState } from "react"
 
-export const PriceWrapper = () => {
+export const PriceWrapper = ({value, setValue}: any) => {
 
-    const [value, setValue] = useState(0)
     const handleIncrement = () => {
         setValue(value + 1)
     }
@@ -21,13 +19,13 @@ export const PriceWrapper = () => {
                 <p>Entrada e acesso à pista do evento.</p>
             </div>
             <div className="flex" >
-                <div onClick={handleDecrement} className="bg-blue rounded text-white font-medium w-8 h-8 flex justify-center items-center">
+                <div onClick={handleDecrement} className="bg-blue rounded text-white font-medium w-8 h-8 flex justify-center items-center cursor-pointer">
                     <p>-</p>
                 </div>
                 <div className="bg-white rounded border border-neutral-500 mx-2 text-blue font-medium w-8 h-8 flex justify-center items-center">
                     <p>{value}</p>
                 </div>
-                <div onClick={handleIncrement} className="bg-blue rounded text-white font-medium w-8 h-8 flex justify-center items-center">
+                <div onClick={handleIncrement} className="bg-blue rounded text-white font-medium w-8 h-8 flex justify-center items-center cursor-pointer">
                     <p>+</p>
                 </div>
             </div>

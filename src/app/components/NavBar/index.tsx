@@ -16,7 +16,7 @@ export const NavBar = () => {
     return (
         <nav className="bg-blue flex mx-auto px-6 fixed top-0 w-full h-16 items-center z-10">
             <Link href={'/'}>
-                <Image className="mr-[6rem] bg-white rounded-md" src='/logo.png' alt="logo" width={200} height={200} priority/>
+                <Image className="mr-[6rem] bg-white rounded-md w-auto h-auto" src='/logo.png' alt="logo"  width={200} height={200} priority/>
             </Link>
             <div className=" flex items-center w-[50vw] ">
                 <input  

@@ -1,5 +1,3 @@
-'use client'
-
 
 import { FormWrapper } from "@/app/components/Form/FormWrapper";
 import { FetchWrapper } from "@/app/utils/FetchWrapper";
@@ -50,7 +48,7 @@ export default async function EventDetailsPage({params}: {params: {id: string}})
                     </div>
                 </div>
                 <div className="">
-                    <FormWrapper price={data.price[0]?.amount} eventId={params.id}/>
+                    <FormWrapper price={data.price[0]?.amount} eventId={params.id} cupom={data.coupons[0]}/>
                 </div>
             </div>
         </div>

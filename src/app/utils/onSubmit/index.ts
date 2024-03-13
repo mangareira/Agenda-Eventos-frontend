@@ -6,7 +6,7 @@ export const onSubmitCreate = async (data: IFormProps, flyers: any) => {
     const newDate = new Date(`${data.date}T${data.time}`).toISOString()        
     const formData = new FormData()      
     formData.append('title', data.title)
-    formData.append('cupom', data.cupom)      
+    formData.append('coupons', data.cupom)      
     formData.append('date', newDate)      
     formData.append('location[latitude]', data.latitude)   
     formData.append('location[longitude]', data.longitude)

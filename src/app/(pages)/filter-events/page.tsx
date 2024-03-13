@@ -88,8 +88,8 @@ export default function FilterEvents() {
                     </form>
                 </div>
                 <div className="mb-4 ml-4 ">
-                    <p className="text-blue text-2xl font-medium" >Adicionar Eventos</p>
-                    <p className="text-blue text-base font-light" >Crie sue próprio evento da maneira que você preferir :)</p>
+                    <p className="text-blue text-2xl font-medium" >Eventos</p>
+                    <p className="text-blue text-base font-light" >Aqui estão os eventos filtrados de acordo com as suas preferências :)</p>
                     {events.map((event: any, index: any) => {
                         return <CardFilter event={event} key={index} />;
                     })}
