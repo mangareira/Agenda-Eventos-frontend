@@ -1,6 +1,7 @@
 import Link from "next/link"
 
 export const BannerSecondary = ({events}: any) => {
+    
     const date = new Date(events.date)
     
     const image = `http://localhost:3333/uploads/${events.banner}`

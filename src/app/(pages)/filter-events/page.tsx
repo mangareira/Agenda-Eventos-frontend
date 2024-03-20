@@ -15,7 +15,7 @@ import { useForm } from "react-hook-form";
 export default function FilterEvents() {
     const searchParams = useSearchParams()
     const [events, setEvents] = useState<any>([])
-    const {register, handleSubmit, setValue} = useForm<IFormFilter>()
+    const {register, handleSubmit, setValue, reset} = useForm<IFormFilter>()
     const getEvents = async (data: any) => {
         const response = await FetchWrapper(`/events/filter?` + new URLSearchParams({
             name: data.name
@@ -48,6 +48,11 @@ export default function FilterEvents() {
         );
         setEvents(response.data);
     }    
+
+    const handleReset = () => {
+        reset()
+    }
+
     return (
         <div className="container mx-auto">
             <div className="grid sm:grid-cols-2 gap-1 grid-cols-1 p-8">
@@ -82,7 +87,7 @@ export default function FilterEvents() {
                         <InputRange title="Distância" {...register('radius')}/>
                         <InputRange title="Valor" {...register('price')} />
                         <div className="grid grid-cols-2 gap-7 w-2/3 m-auto">
-                            <Button title="Limpar" className="bg-white border text-blue border-blue"/>
+                            <Button title="Limpar" className="bg-white border text-blue border-blue" onClick={handleReset} />
                             <Button title="Buscar"/>
                         </div>
                     </form>

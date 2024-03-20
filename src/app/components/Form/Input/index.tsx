@@ -2,7 +2,7 @@ import { ChangeEvent, ForwardRefRenderFunction, forwardRef } from "react"
 
 
 interface IInput {
-    placeholder: string
+    placeholder?: string
     type: string
     title: string
     className? : string

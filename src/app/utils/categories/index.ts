@@ -5,11 +5,6 @@ export const categories = [
         route: 'academic'
     },
     {
-        name: 'Animais',
-        icon: '/animais.png',
-        route: 'animals'
-    },
-    {
         name: 'Cultural',
         icon: '/cultural.png',
         route: 'cultural'
@@ -23,11 +18,6 @@ export const categories = [
         name: 'Festival',
         icon: '/festival.png',
         route: 'festival'
-    },
-    {
-        name: 'Gastronomicos',
-        icon: '/gastronomicos.png',
-        route: 'gastronomic'
     },
     {
         name: 'Musical',

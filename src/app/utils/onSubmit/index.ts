@@ -25,15 +25,10 @@ export const onSubmitCreate = async (data: IFormProps, flyers: any) => {
         toast.error('Erro ao criar evento')
     }
 }
-export const onSubmitParticipants = async (data: IParticipants, eventsId: any) => {    
-    
-    const formData = {
-        name: data.name,
-        email: data.email
-    }      
-
+export const onSubmitParticipants = async (data: IParticipants, eventsId: any) => {            
     try {
-        const response = await FetchWrapper(`/events/${eventsId}/participants`, 'POST', formData)       
+        const response = await FetchWrapper(`/events/${eventsId}/participants`, 'POST', data) 
+        localStorage.setItem('id', await response.data.participantId)
         toast.success('Participante adicionado com sucesso')     
     } catch (error) {
         toast.error('Erro ao adcionar o participante')

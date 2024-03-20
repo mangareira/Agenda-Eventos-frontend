@@ -132,15 +132,6 @@ export default  function CreateEvent() {
                                 </div>
                             </div>
                         </div>
-                        <div className="my-4">
-                            <p className="text-blue text-base font-medium">Mapa do evento</p>
-                            <p className="text-neutral-500 text-sm font-light ">
-                                Insira o Mapa do Evento indicado os setores
-                            </p>
-                            <div className="w-full h-60 bg-zinc-300 rounded-3xl shadow">
-                                <InputFile {...register("map")} onChange={(e: any) => handleFileChange('map', e)} />
-                            </div>
-                        </div>
                         <Button title="Cadastrar Evento" className="" />
                     </div>
                 </div>

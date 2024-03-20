@@ -1,6 +1,7 @@
 import Link from "next/link"
 
 export const BannerPrimary = ({events}: any) => {
+    
     const date = new Date(events.date)
     
     const image = `http://localhost:3333/uploads/${events.banner}`
@@ -8,7 +9,7 @@ export const BannerPrimary = ({events}: any) => {
     return (
         <Link href={`/event-details/${events._id}`}>
             <div className="rounded py-5">
-                <div className="w-full h-[280px] relative rounded-3xl shadow bg-cover bg-center" style={{backgroundImage: `url(${image})`}} >
+                <div className="w-full h-[280px] relative rounded-3xl shadow bg-cover bg-center" style={{ backgroundImage:  `url(${image})`}} >
                     <div className="p-5 text-white absolute bottom-0">
                         <h3 className="text-5xl pb-4 font-bold">{events.title}</h3>
                         <div className="flex">
