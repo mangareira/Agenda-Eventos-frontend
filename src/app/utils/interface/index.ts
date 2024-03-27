@@ -24,5 +24,5 @@ export interface IFormProps {
 export interface IParticipants {
     name: string
     email: string
-    valor: number
+    valor: string
 }

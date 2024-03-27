@@ -9,6 +9,7 @@ import { onSubmitParticipants } from "@/app/utils/onSubmit"
 import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 import { useRouter } from "next/navigation"
+import { log } from "console"
 
 export const FormWrapper = ({price, eventId, cupom}: any) => {
     
@@ -25,8 +26,8 @@ export const FormWrapper = ({price, eventId, cupom}: any) => {
         setPriceValue(priceInt.toFixed(2).toString())
         
     }, [value])
-    const onSubmit = async(data: IParticipants) => {                
-        await onSubmitParticipants({...data, valor: Number(priceValue)}, eventId) 
+    const onSubmit = async(data: IParticipants) => {                        
+        await onSubmitParticipants({...data, valor: String(priceValue)}, eventId) 
         const id =  localStorage.getItem('id')
         router.push(`/event-details/${eventId}/participant/${id}`)
     }
