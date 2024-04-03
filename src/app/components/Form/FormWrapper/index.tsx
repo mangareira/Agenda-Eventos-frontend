@@ -9,27 +9,37 @@ import { onSubmitParticipants } from "@/app/utils/onSubmit"
 import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 import { useRouter } from "next/navigation"
-import { log } from "console"
 
 export const FormWrapper = ({price, eventId, cupom}: any) => {
     
     const {register, handleSubmit, formState: {errors}} = useForm<IParticipants>()
     const [value, setValue] = useState(0)
     const [input, setInput] = useState('')
+    const [discount, setDiscount] = useState('Not discount')
     const [priceValue, setPriceValue] = useState<string>(price)
+    
     
     const router = useRouter()
 
     useEffect(() => {
-        const priceNumber = Number(price.split(',')[0] + '.' + price.split(',')[1])
-        const priceInt = value * priceNumber                
-        setPriceValue(priceInt.toFixed(2).toString())
+        if(price === '') {
+            setPriceValue('gratis')
+        }else {
+            const priceNumber = Number(price.split(',')[0] + '.' + price.split(',')[1])
+            const priceInt = value * priceNumber                
+            setPriceValue(priceInt.toFixed(2).toString())
+        }
         
     }, [value])
-    const onSubmit = async(data: IParticipants) => {                        
-        await onSubmitParticipants({...data, valor: String(priceValue)}, eventId) 
-        const id =  localStorage.getItem('id')
-        router.push(`/event-details/${eventId}/participant/${id}`)
+    const onSubmit = async(data: IParticipants) => {
+               
+        if(price === '') {
+            await onSubmitParticipants({...data, valor:'', tickets: String(value), discount}, eventId) 
+        }else {            
+            await onSubmitParticipants({...data, valor: String(priceValue), tickets: String(value), discount,}, eventId) 
+            const id =  localStorage.getItem('id')
+            router.push(`/event-details/${eventId}/participant/${id}`)
+        }                 
     }
     const applyCupom = () => {
         const priceNumber = Number(price.split(',')[0] + '.' + price.split(',')[1])
@@ -38,6 +48,7 @@ export const FormWrapper = ({price, eventId, cupom}: any) => {
         if(input === cupom) {
             const discount =  85/100 * Number(priceInt) 
             setPriceValue(String(discount))
+            setDiscount('Discount')
             toast.success('Cupom aplicado')
         } else {
             setPriceValue(String(priceInt))

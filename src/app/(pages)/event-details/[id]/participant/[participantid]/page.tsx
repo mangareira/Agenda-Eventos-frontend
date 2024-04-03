@@ -1,43 +1,63 @@
 'use client'
-
+import { Button } from "@/app/components/Form/Button";
 import { FetchWrapper } from "@/app/utils/FetchWrapper";
-import Image from "next/image";
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-export default function PaymentPage({params}: {params: {participantid: string}}) {
-    const [qrCode, setQrCode] = React.useState('');
-    const [paymentValue, setPaymentValue] = React.useState(0);
+export default function PaymentPage({ params }: { params: { participantid: string } }) {
+  const [qrCode, setQrCode] = useState('');
+  const [paymentValue, setPaymentValue] = useState<number | string>(0);
+  const [pixCopiaECola, setPixCopiaECola] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<any>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
+      setError(null);
+
       try {
         const response = await FetchWrapper('/events/findparticipants/' + params.participantid, 'GET');
         setQrCode(response.data.payment.qrCode);
         setPaymentValue(response.data.payment.valor);
+        setPixCopiaECola(response.data.payment.pixCopiaECola);
       } catch (error) {
         console.error('Error fetching data:', error);
+        setError(error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchData();
   }, [params.participantid]);
-    
-    return (
-        <div className="container mx-auto">
-            <div className="h-[615px]">
-                <div className="grid grid-cols-2 h-full items-center">
-                    <div className="flex justify-center h-full flex-wrap flex-col items-center font-medium text-blue">
-                        <div className="">
-                            <img src={qrCode} alt="qrcode"  width={200} height={200} />
-                        </div>
-                        <p className="text-2xl ">valor: R${paymentValue}</p>
-                        <p>pix copia cola: </p>
-                    </div>
-                    <div className="">
-                        <p></p>
-                    </div>
-                </div>
-            </div>
+
+  const copyPixToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(pixCopiaECola);
+      alert('Código PIX copiado para a área de transferência!');
+    } catch (error) {
+      alert('Erro ao copiar o código PIX. Por favor, tente novamente.');
+    }
+  };
+
+  return (
+    <div className="container mx-auto">
+      <h1 className="text-2xl font-bold text-gray-900">Detalhes do Pagamento</h1>
+
+      {isLoading ? (
+        <p className="text-base leading-6 text-gray-500">Carregando...</p>
+      ) : error ? (
+        <p className="text-base leading-6 text-red-500">Erro ao carregar os dados. Por favor, tente novamente mais tarde.</p>
+      ) : (
+        <div className="flex flex-col items-center">
+          <p className="text-base leading-6 text-gray-500">Valor: R${paymentValue}</p>
+
+          <img src={qrCode} alt="qrcode" className="max-w-xs mx-auto" />
+
+          <p className="text-base leading-6 text-gray-500">Copie e cole o PIX: {pixCopiaECola}</p>
+          <Button title="Copie cole"  onClick={copyPixToClipboard}/>
         </div>
-    )
+      )}
+    </div>
+  );
 }

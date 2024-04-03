@@ -6,6 +6,7 @@ export default async function EventDetailsPage({params}: {params: {id: string}})
     const response = await FetchWrapper(`/events/${params.id}` 
     , 'GET')
     const data = response.data
+    
     const image = `http://localhost:3333/uploads/${data.banner}`
     const flyer = `http://localhost:3333/uploads/${data.flyers[0]}`
     const date = new Date(data.date)

@@ -25,4 +25,6 @@ export interface IParticipants {
     name: string
     email: string
     valor: string
+    tickets: string
+    discount: string
 }
