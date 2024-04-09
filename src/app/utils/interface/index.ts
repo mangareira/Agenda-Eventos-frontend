@@ -22,9 +22,11 @@ export interface IFormProps {
     map: File
 }
 export interface IParticipants {
-    name: string
-    email: string
     valor: string
     tickets: string
     discount: string
+}
+export interface ILogin {
+    email: string
+    password: string
 }

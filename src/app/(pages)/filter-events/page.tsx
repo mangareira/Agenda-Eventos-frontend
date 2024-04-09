@@ -16,11 +16,15 @@ export default function FilterEvents() {
     const searchParams = useSearchParams()
     const [events, setEvents] = useState<any>([])
     const {register, handleSubmit, setValue, reset} = useForm<IFormFilter>()
-    const getEvents = async (data: any) => {
+    
+    const getEvents = async (data: any) => {        
         const response = await FetchWrapper(`/events/filter?` + new URLSearchParams({
             name: data.name
-        }), 'GET')
-        setEvents(response.data)    
+        }), 'GET')        
+    
+        
+        setEvents(response.data)   
+         
     } 
     useEffect(() =>{
         if(searchParams.get('q')) {

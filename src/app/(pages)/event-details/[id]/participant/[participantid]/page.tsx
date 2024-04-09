@@ -55,7 +55,7 @@ export default function PaymentPage({ params }: { params: { participantid: strin
           <img src={qrCode} alt="qrcode" className="max-w-xs mx-auto" />
 
           <p className="text-base leading-6 text-gray-500">Copie e cole o PIX: {pixCopiaECola}</p>
-          <Button title="Copie cole"  onClick={copyPixToClipboard}/>
+          <Button title="Copie cole"  onClick={copyPixToClipboard} className="hover:bg-blue-600 hover:text-blue"/>
         </div>
       )}
     </div>

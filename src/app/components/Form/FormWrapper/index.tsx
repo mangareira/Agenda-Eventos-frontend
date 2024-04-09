@@ -34,11 +34,15 @@ export const FormWrapper = ({price, eventId, cupom}: any) => {
     const onSubmit = async(data: IParticipants) => {
                
         if(price === '') {
-            await onSubmitParticipants({...data, valor:'', tickets: String(value), discount}, eventId) 
+            await onSubmitParticipants({...data, valor:'', tickets: String(value), discount}, eventId)
+            const id =  localStorage.getItem('user')
+            //router.push(`/event-details/${eventId}/participant/${id}`) 
         }else {            
-            await onSubmitParticipants({...data, valor: String(priceValue), tickets: String(value), discount,}, eventId) 
-            const id =  localStorage.getItem('id')
-            router.push(`/event-details/${eventId}/participant/${id}`)
+            const result = await onSubmitParticipants({...data, valor: String(priceValue), tickets: String(value), discount,}, eventId) 
+            const id =  localStorage.getItem('user')
+            if(result.status === 200){
+                router.push(`/event-details/${eventId}/participant/${id}`)
+            }
         }                 
     }
     const applyCupom = () => {
@@ -72,16 +76,8 @@ export const FormWrapper = ({price, eventId, cupom}: any) => {
                         <Input  title="Subtotal" type="text" className="col-span-2" {...register('valor')} value={priceValue} /> 
                     </div>
             </form>
-                <Button title="Aplicar Cupom" onClick={applyCupom}/>
+                <Button title="Aplicar Cupom" onClick={applyCupom} className="mb-6"/>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <Input title="Nome" placeholder="Insira seu nome" type="text" {...register('name')} />
-                {errors.name && (
-                        <span className="text-red-500" >Campo obrigatorio</span>
-                )}
-                <Input title="Email" placeholder="Insira seu email" type="text"{...register('email')} />
-                {errors.email && (
-                        <span className="text-red-500" >Campo obrigatorio</span>
-                )}
                 <Button title="Cadastrar" />
             </form>
             </div>

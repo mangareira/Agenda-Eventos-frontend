@@ -1,12 +1,24 @@
-
+'use client'
 import { FormWrapper } from "@/app/components/Form/FormWrapper";
 import { FetchWrapper } from "@/app/utils/FetchWrapper";
+import { useEffect, useState } from "react";
 
-export default async function EventDetailsPage({params}: {params: {id: string}}) { 
-    const response = await FetchWrapper(`/events/${params.id}` 
-    , 'GET')
-    const data = response.data
     
+export default function EventDetailsPage({params}: {params: {id: string}}) { 
+    const [data, setData] = useState<any>(null);
+
+    useEffect(() => {
+        async function fetchData() {
+            const {data} = await FetchWrapper(`/events/${params.id}`, 'GET')
+            setData(data)
+        }
+        fetchData();
+    }, [params.id]);
+    if(!data) {
+        return (
+            <div className="">...loading</div>
+        )
+    }
     const image = `http://localhost:3333/uploads/${data.banner}`
     const flyer = `http://localhost:3333/uploads/${data.flyers[0]}`
     const date = new Date(data.date)

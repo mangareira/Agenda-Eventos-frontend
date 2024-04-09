@@ -1,14 +1,16 @@
 'use client'
 import { CardFilter } from '@/app/components/Form/CardFilter';
 import { FetchWrapper } from '@/app/utils/FetchWrapper';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 export default function Categories() {
     const [events, setEvents] = useState<any>([])
     const searchParams = useSearchParams();
-    const getEvents = async (value: any) => {                
-        const response = await FetchWrapper(`/events/category/${value}`, 'GET')
+
+    
+    const getEvents = async (value: any) => {                        
+        const response = await FetchWrapper(`/events/category/${value}`, 'GET' )        
         setEvents(response.data)                    
     } 
     useEffect(() =>{

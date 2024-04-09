@@ -5,11 +5,13 @@ import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { BannerSecondary } from "../BannerSecondary"
+import { Button } from "../Form/Button"
 
 export const NavBar = () => {
 
     const [search, setSearch] = useState('')
     const [relatedEvents, setRelatedEvents] = useState([])
+
     const handleEventClick = () => {
         setSearch('')
     }
@@ -45,14 +47,17 @@ export const NavBar = () => {
                 {relatedEvents.length > 0 && (
                     <ul className="absolute top-full bg-white shadow rounded-xl w-[50vw] py-1 z-20">
                         {relatedEvents.map((event: any, index) => (
-                            <Link href={`/event-details/${event._id}`} key={index}>
-                                <li  className="px-4 py-2 hover:bg-gray-200 hover:rounded-xl cursor-pointer w-full " onClick={handleEventClick}>
-                                    <BannerSecondary events={event}/>
-                                </li>
-                            </Link>
+                            <li  className="px-4 py-2 hover:bg-gray-200 hover:rounded-xl cursor-pointer w-full " onClick={handleEventClick} key={index}>
+                                <BannerSecondary events={event}/>
+                            </li>
                         ))}
                     </ul>
                 )}
+            </div>
+            <div className="ml-[6rem]">
+                <Link href={'/login'}>
+                    <Button title="Login" className=" bg-white text-blue hover:bg-blue-600 hover:text-white transition"/>
+                </Link>
             </div>
         </nav>
     )
