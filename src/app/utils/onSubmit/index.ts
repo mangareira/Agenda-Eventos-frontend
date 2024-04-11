@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import { FetchWrapper } from "../FetchWrapper";
-import {  IFormProps, ILogin, IParticipants } from "../interface";
+import {  IAccount, IFormProps, ILogin, IParticipants } from "../interface";
 
 
 
@@ -58,4 +58,16 @@ export const onSubimtLogin = async (data: ILogin) => {
             toast.success("login feito com sucesso")
         }     
         return response             
+}
+export const onSubimtCreateAccount = async (data: IAccount) => {
+    const response =  await FetchWrapper(`/events/create-account`, 'POST',data)          
+    if(response.code === 'ERR_BAD_REQUEST'){
+        toast.error(response.response.data.message)
+    }
+    if(response.status === 201) {
+        toast.success("login feito com sucesso")
+    } 
+    console.log(response);
+        
+    return response 
 }

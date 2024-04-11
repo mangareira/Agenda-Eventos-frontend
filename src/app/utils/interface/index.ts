@@ -30,3 +30,9 @@ export interface ILogin {
     email: string
     password: string
 }
+export interface IAccount {
+    name: string
+    email: string
+    cpf: string
+    password: string
+}

@@ -3,7 +3,7 @@ import axios, { Method } from "axios";
 export const FetchWrapper = async (url: string, method: Method, body?: any ) => { 
     const getAccessToken = () => {
         if (typeof window !== 'undefined'){
-            const token = localStorage.getItem('refresh_token');            
+            const token = localStorage.getItem('token');            
             return token
         } 
     }
