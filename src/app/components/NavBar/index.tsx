@@ -49,10 +49,12 @@ export const NavBar = () => {
         }
         const refreshToken = async () => {
             const token = localStorage.getItem('refresh_token')
-            const refresh = await FetchRefresh('/events/refresh-token', 'POST', token)
+            const refresh = await FetchRefresh('/events/refresh-token', 'POST', token)            
             if(refresh.status === 200)  {
                 localStorage.setItem('token', refresh.data.access_token)          
                 localStorage.setItem('refresh_token', refresh.data.access_refresh_token)          
+            }else{
+                router.push('/token-expired')
             }
         }
         refreshToken()

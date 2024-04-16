@@ -8,13 +8,12 @@ export default async function DashBoard(){
     const response = await FetchWrapper("/events/main", 'GET') 
     
     
-    const secondary = response.data.slice(1) 
-    
+    const secondary = response.data.slice(1)     
     const error = () => {
-        if (!response) {
+        if (!response.data.lenght) {
             return (
-              <div className="w-full h-[280px] relative rounded-3xl shadow bg-cover bg-cente flex justify-center items-center ">
-                <p className="text-red-500 font-medium" >Não existe evento para esta data</p>
+              <div className="w-full h-[280px] relative rounded-3xl shadow  flex justify-center items-center ">
+                <p className="text-blue font-medium" >Não existe evento para esta data</p>
               </div>
             );
         }
@@ -34,8 +33,8 @@ export default async function DashBoard(){
                         <BannerSecondary events={events}/>
                     </div>
                 ))}
-                <div className="">{error()}</div>
             </div>
+            <div className="">{error()}</div>
             <div className="p-2 text-blue">
                 <p className="text-2xl font-medium">Navegue por tipo de evento</p>
                 <p className=" text-base font-light ">vá ao evento que é sua cara :D</p>
