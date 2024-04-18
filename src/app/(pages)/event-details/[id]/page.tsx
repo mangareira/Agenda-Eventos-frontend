@@ -1,11 +1,13 @@
 'use client'
 import { FormWrapper } from "@/app/components/Form/FormWrapper";
+import { LoginError } from "@/app/components/LoginError";
 import { FetchWrapper } from "@/app/utils/FetchWrapper";
 import { useEffect, useState } from "react";
 
     
 export default function EventDetailsPage({params}: {params: {id: string}}) { 
     const [data, setData] = useState<any>(null);
+    const [state, setState] = useState('')
 
     useEffect(() => {
         async function fetchData() {
@@ -22,10 +24,13 @@ export default function EventDetailsPage({params}: {params: {id: string}}) {
     const image = `http://localhost:3333/uploads/${data.banner}`
     const flyer = `http://localhost:3333/uploads/${data.flyers[0]}`
     const date = new Date(data.date)
-    
+    const handleCloseError = () => {
+        setState(""); 
+    }
     return (
         <div className="">
-            <div className="w-full h-[280px] relative bg-cover bg-center  shadow " 
+            <div className=""><LoginError state={state} onClose={handleCloseError}/></div>
+            <div className="w-full h-[280px] relative bg-cover bg-center  shadow -z-10 " 
             style={{backgroundImage: `url(${image})`}} 
             >
                 <div className="p-5 text-white absolute bottom-0">
@@ -56,12 +61,12 @@ export default function EventDetailsPage({params}: {params: {id: string}}) {
             <div className="grid grid-cols-2 gap-2 text-blue p-4 mr-14 ">
                 <div className="">
                     <p>{data.description}</p>
-                    <div className="w-[200px] h-[200px] relative bg-cover bg-center shadow" style={{backgroundImage: `url(${flyer})`}}>
+                    <div className="w-[200px] h-[200px] relative bg-cover bg-center shadow -z-10" style={{backgroundImage: `url(${flyer})`}}>
 
                     </div>
                 </div>
                 <div className="">
-                    <FormWrapper price={data.price[0]?.amount} eventId={params.id} cupom={data.coupons[0]}/>
+                    <FormWrapper price={data.price[0]?.amount} eventId={params.id} cupom={data.coupons[0]} setState={setState}/>
                 </div>
             </div>
         </div>

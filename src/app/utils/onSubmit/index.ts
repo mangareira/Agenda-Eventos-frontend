@@ -4,7 +4,8 @@ import {  IAccount, IFormProps, ILogin, IParticipants } from "../interface";
 
 
 
-export const onSubmitCreate = async (data: IFormProps, flyers: any) => {
+export const onSubmitCreate = async (data: IFormProps, flyers: any) => {    
+    if(!data.date && !data.time) return 'use uma data valida'  
     const newDate = new Date(`${data.date}T${data.time}`).toISOString()        
     const formData = new FormData()      
     formData.append('title', data.title)
@@ -20,12 +21,12 @@ export const onSubmitCreate = async (data: IFormProps, flyers: any) => {
     flyers.forEach((flyer: any) => {
         formData.append('flyers', flyer)
     })
-    const response = await FetchWrapper("/events", 'POST',formData) 
-    if(response.response.data.message == 'token is missing') return response.response.data.message  
+    const response = await FetchWrapper("/events", 'POST',formData)     
+    if(response.response?.data?.message == 'token is missing') return response.response.data.message  
     if(response.code === 'ERR_BAD_REQUEST') {
         toast.error('Erro ao criar evento')
     }
-    if(response.status === 200) {
+    if(response.status === 201) {
         toast.success('Evento criado com sucesso')      
     }
 }
@@ -37,6 +38,7 @@ export const onSubmitParticipants = async (data: IParticipants, eventsId: any,) 
         } 
     }         
     const response = await FetchWrapper(`/events/${eventsId}/${getUserId()}/participants`, 'POST',data) 
+    if(response.response?.data?.message == 'token is missing') return response.response.data.message
     if(response.code === 'ERR_BAD_REQUEST') {
         toast.error(response.response.data.message)
     }

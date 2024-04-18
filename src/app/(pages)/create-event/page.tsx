@@ -10,6 +10,7 @@ import { IFormProps } from "@/app/utils/interface";
 import { onSubmitCreate } from "@/app/utils/onSubmit";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 
 export default  function CreateEvent() {
@@ -30,6 +31,7 @@ export default  function CreateEvent() {
     }
     const onSubmit = async (data: IFormProps) => {
         const create = await onSubmitCreate(data,flyers)
+        if(create === 'use uma data valida') toast.error('use uma data valida')       
         setState(create)
     }
     const handleCloseError = () => {

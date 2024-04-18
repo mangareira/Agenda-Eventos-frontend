@@ -4,7 +4,6 @@ import { Button } from "@/app/components/Form/Button";
 import { CardFilter } from "@/app/components/Form/CardFilter";
 import { Input } from "@/app/components/Form/Input";
 import { AutoComplete } from "@/app/components/Form/InputAutoComplete";
-import { InputRange } from "@/app/components/Form/InputRange";
 import { FetchWrapper } from "@/app/utils/FetchWrapper";
 import { categories } from "@/app/utils/categories";
 import { IFormFilter } from "@/app/utils/interface";
@@ -22,7 +21,6 @@ export default function FilterEvents() {
             name: data.name
         }), 'GET')        
     
-        
         setEvents(response.data)   
          
     } 
@@ -35,18 +33,16 @@ export default function FilterEvents() {
         setValue('latitude', address.lat)
         setValue('longitude', address.lng)
     }
-    const onSubmit = async (data: IFormFilter) => {
-        
+    const onSubmit = async (data: IFormFilter) => {        
         const response = await FetchWrapper(
           `/events/filter?` +
             new URLSearchParams({
               name: data.name,
               category: data.categories,
-              price: data.price,
               date: data.date,
               latitude: String(data.latitude),
               longitude: String(data.longitude),
-              radius: data.radius,
+              radius: '100',
             }),
           'GET',
         );
@@ -88,8 +84,7 @@ export default function FilterEvents() {
                                 </select>
                             </div>
                         </div>
-                        <InputRange title="Distância" {...register('radius')}/>
-                        <InputRange title="Valor" {...register('price')} />
+                        {/* <InputRange title="Distância" {...register('radius')}/> */}
                         <div className="grid grid-cols-2 gap-7 w-2/3 m-auto">
                             <Button title="Limpar" className="bg-white border text-blue border-blue" onClick={handleReset} />
                             <Button title="Buscar"/>
