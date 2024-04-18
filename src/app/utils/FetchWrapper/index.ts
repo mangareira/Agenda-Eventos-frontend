@@ -6,7 +6,7 @@ export const FetchWrapper = async (url: string, method: Method, body?: any ) => 
             const token = localStorage.getItem('token');            
             return token
         } 
-    }
+    }    
     try {
         const data:any = await axios.request({
             url: `http://localhost:3333${url}`,
@@ -15,7 +15,7 @@ export const FetchWrapper = async (url: string, method: Method, body?: any ) => 
             headers: {
                 Authorization: `Bearer ${getAccessToken()}`
             }
-        })        
+        })                
         return data;
     } catch (error:any) {  
         return error

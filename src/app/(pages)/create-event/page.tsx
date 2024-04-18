@@ -4,6 +4,7 @@ import { Button } from "@/app/components/Form/Button";
 import { Input } from "@/app/components/Form/Input";
 import { AutoComplete } from "@/app/components/Form/InputAutoComplete";
 import { InputFile } from "@/app/components/Form/InputFile";
+import { LoginError } from "@/app/components/LoginError";
 import { categories } from "@/app/utils/categories";
 import { IFormProps } from "@/app/utils/interface";
 import { onSubmitCreate } from "@/app/utils/onSubmit";
@@ -13,9 +14,8 @@ import { useForm } from "react-hook-form";
 
 export default  function CreateEvent() {
     const [flyers, setFlyers] = useState<File[]>([])
-
+    const [state, setState] = useState('')
     const {register, handleSubmit, formState: {errors}, setValue} = useForm<IFormProps>()
-    
 
     const handleFileChange = (name: any, file: File) => {
         if(name === 'flyers') {
@@ -28,12 +28,18 @@ export default  function CreateEvent() {
         setValue('latitude', address.lat)
         setValue('longitude', address.lng)
     }
-    const onSubmit = (data: IFormProps) => {
-        onSubmitCreate(data,flyers)
+    const onSubmit = async (data: IFormProps) => {
+        const create = await onSubmitCreate(data,flyers)
+        setState(create)
+    }
+    const handleCloseError = () => {
+        setState(""); 
     }
     return (
+        <>
+        <div className=""><LoginError state={state} onClose={handleCloseError}/></div>
         <div className="container mx-auto">
-            <form onSubmit={handleSubmit(onSubmit)} >
+            <form onSubmit={handleSubmit(onSubmit)} className=''>
                 <div className="grid sm:grid-cols-2 gap-1 grid-cols-1 p-8">
                     <div className="mb-4 pr-6 border-r-2 border-[#61D9DE] ">
                         <div className="mb-4">
@@ -137,5 +143,6 @@ export default  function CreateEvent() {
                 </div>
             </form>
         </div>
+        </>
     )
 }

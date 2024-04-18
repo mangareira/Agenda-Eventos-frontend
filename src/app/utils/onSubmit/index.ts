@@ -20,7 +20,8 @@ export const onSubmitCreate = async (data: IFormProps, flyers: any) => {
     flyers.forEach((flyer: any) => {
         formData.append('flyers', flyer)
     })
-    const response = await FetchWrapper("/events", 'POST',formData)  
+    const response = await FetchWrapper("/events", 'POST',formData) 
+    if(response.response.data.message == 'token is missing') return response.response.data.message  
     if(response.code === 'ERR_BAD_REQUEST') {
         toast.error('Erro ao criar evento')
     }
@@ -65,7 +66,7 @@ export const onSubimtCreateAccount = async (data: IAccount) => {
         toast.error(response.response.data.message)
     }
     if(response.status === 201) {
-        toast.success("login feito com sucesso")
+        toast.success("Conta criada com sucesso")
     } 
     console.log(response);
         
