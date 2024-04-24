@@ -5,10 +5,11 @@ import { Input } from "@/app/components/Form/Input";
 import { AutoComplete } from "@/app/components/Form/InputAutoComplete";
 import { InputFile } from "@/app/components/Form/InputFile";
 import { LoginError } from "@/app/components/LoginError";
+import { FetchWrapper } from "@/app/utils/FetchWrapper";
 import { categories } from "@/app/utils/categories";
 import { IFormProps } from "@/app/utils/interface";
 import { onSubmitCreate } from "@/app/utils/onSubmit";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
@@ -17,7 +18,15 @@ export default  function CreateEvent() {
     const [flyers, setFlyers] = useState<File[]>([])
     const [state, setState] = useState('')
     const {register, handleSubmit, formState: {errors}, setValue} = useForm<IFormProps>()
-
+    const [role, setRole] = useState('')
+    useEffect(() => {
+        const role = async () => {
+            const id = localStorage.getItem('user')
+            const data = await FetchWrapper(`/events/get-participant/${id}`, 'GET')
+            setRole(data.data)
+        }
+        role()
+    }, [])
     const handleFileChange = (name: any, file: File) => {
         if(name === 'flyers') {
             setFlyers([...flyers, file])
@@ -37,6 +46,11 @@ export default  function CreateEvent() {
     const handleCloseError = () => {
         setState(""); 
     }
+    if(role !== 'admin') return (
+        <div className="">
+            você não tem acesso
+        </div>
+    )
     return (
         <>
         <div className=""><LoginError state={state} onClose={handleCloseError}/></div>

@@ -1,4 +1,7 @@
+'use client'
+import { FetchWrapper } from "@/app/utils/FetchWrapper"
 import Link from "next/link"
+import { useEffect, useState } from "react"
 import { AiOutlineHome } from "react-icons/ai"
 import { BsQuestionCircle } from "react-icons/bs"
 import { FiFilter } from "react-icons/fi"
@@ -6,6 +9,25 @@ import { LiaMapMarkedSolid } from "react-icons/lia"
 import { MdOutlineAddBox, MdOutlinePrivacyTip } from "react-icons/md"
 
 export const SideBar = () => {
+    const [role, setRole] = useState('')
+    useEffect(() => {
+        const role = async () => {
+            const id = localStorage.getItem('user')
+            const data = await FetchWrapper(`/events/get-participant/${id}`, 'GET')
+            setRole(data.data)
+        }
+        role()
+    }, [])
+    const adminAccess = () => {
+        if(role === 'admin') return (
+            <Link href={'/create-event'}>
+                <div className="flex flex-col cursor-pointer justify-center items-center mb-9">
+                    <MdOutlineAddBox size={30}/>
+                    <span>Adicionar Eventos</span>
+                </div>
+            </Link>
+        )
+    }
     return (
         <>
             <div className="sidebar fixed z-10 top-16 bottom-0 text-xs text-blue h-screen right-0 p-2 w-[90px] overflow-auto text-center bg-gray-200 shadow">
@@ -22,12 +44,7 @@ export const SideBar = () => {
                             <span>Mapa</span>
                         </div>
                     </Link>
-                    <Link href={'/create-event'}>
-                        <div className="flex flex-col cursor-pointer justify-center items-center mb-9">
-                            <MdOutlineAddBox size={30}/>
-                            <span>Adicionar Eventos</span>
-                        </div>
-                    </Link>
+                    {adminAccess()}
                     <Link href={'/filter-events'}>
                         <div className="flex flex-col cursor-pointer justify-center items-center mb-9">
                             <FiFilter size={30}/>
