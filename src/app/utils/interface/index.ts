@@ -36,3 +36,9 @@ export interface IAccount {
     cpf: string
     password: string
 }
+export type IPagination = {
+    page: number 
+    limit: number
+    total: number
+    classNameDiv?: string
+}

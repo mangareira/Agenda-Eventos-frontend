@@ -1,6 +1,6 @@
 import axios, { Method } from "axios";
 
-export const FetchWrapper = async (url: string, method: Method, body?: any ) => { 
+export const FetchWrapper = async (url: string, method: Method, body?: any, params?: any ) => { 
     const getAccessToken = () => {
         if (typeof window !== 'undefined'){
             const token = localStorage.getItem('token');            
@@ -14,7 +14,8 @@ export const FetchWrapper = async (url: string, method: Method, body?: any ) => 
             data: body,
             headers: {
                 Authorization: `Bearer ${getAccessToken()}`
-            }
+            },
+            params,
         })                
         return data;
     } catch (error:any) {  
