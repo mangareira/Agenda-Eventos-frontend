@@ -104,9 +104,12 @@ export const NavBar = () => {
                             <HiUserCircle size={35} color="white" />
                             <FaAngleDown color="white" className="ml-4" onClick={toggleDropdown}/>
                             {showDropdown && (
-                                <div className="absolute top-14 right-48 bg-blue text-white shadow-md p-2 z-10">
+                                <div className="absolute top-14 right-56  text-white shadow-md z-10">
                                     <ul className="">
-                                        <li onClick={out} className="cursor-pointer text-end w-20 h-6">Sair</li>
+                                        <Link href={'/profile/my-events'}>
+                                            <li className="cursor-pointer text-end w-32 h-8 hover:bg-blue-600 bg-blue pr-2">Meus Eventos</li>
+                                        </Link>
+                                        <li onClick={out} className="cursor-pointer text-end w-32 h-8 hover:bg-blue-600 bg-blue pr-2 rounded-b-lg">Sair</li>
                                     </ul>
                                 </div>
                             )}
