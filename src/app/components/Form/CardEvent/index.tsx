@@ -20,7 +20,7 @@ export const CardEvent = ({events}: any) => {
                         <Link href={`/profile/my-events/${events._id}/cert`}>
                             <div className="">Certificado</div>
                         </Link>
-                        <Link href={`/profile/my-events/${events._id}/details`}>
+                        <Link href={`/event-details/${events._id}`}>
                             <div className="">Detalhes</div>
                         </Link>
                     </div>

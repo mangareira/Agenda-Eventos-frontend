@@ -9,7 +9,7 @@ type PageProps = {
 }
 export default function myEvents ({searchParams}: PageProps) {
     const page = Number(searchParams?.page) || 1
-    const limit = Number(searchParams?.limit) ||10
+    const limit = Number(searchParams?.limit) ||6
     const [events, setEvents] = useState([])
     const [quantity, setQuantity] = useState<Number | any>()
 

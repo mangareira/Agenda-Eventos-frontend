@@ -14,9 +14,12 @@ export const CardSubs = async ({eventId}: any) => {
     } 
     const {data} = await FetchWrapper(`/events/get-events-payment/${eventId}`, 'GET', '',{userId})
     let status:boolean = false
-    if(data?.payment.status !== 'Pago') {
-        status = true
-    }    
+    console.log(data);
+    
+    if(data?.payment.status !== 'Pago' && data?.payment.status !== 'gratis') {
+        status = true;
+    }
+        
     const handlePush = async() => {
         const response = await FetchWrapper(`/events/new-pix/${data.payment.txid}`,'POST')
         router.push(`${pathName}/new-pix?txid=${response.data.payment.txid}`)
