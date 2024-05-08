@@ -1,24 +1,31 @@
 'use client'
 import Image from "next/image"
-import { Button } from "../Form/Button"
+import { Button } from "@/app/components/Form/Button"
 import { FetchWrapper } from "@/app/utils/FetchWrapper"
 import { usePathname, useRouter } from "next/navigation"
+import { useEffect, useState } from "react";
 
-export const CardSubs = async ({eventId}: any) => {
+export const CardSubs = ({eventId}: any) => {
     const router = useRouter()
     const pathName = usePathname()
-    let userId
-    if (typeof window !== 'undefined'){
-        const user = localStorage.getItem('user');            
-        userId = user
-    } 
-    const {data} = await FetchWrapper(`/events/get-events-payment/${eventId}`, 'GET', '',{userId})
-    let status:boolean = false
-    console.log(data);
-    
-    if(data?.payment.status !== 'Pago' && data?.payment.status !== 'gratis') {
-        status = true;
-    }
+    const [status, setStatus] = useState<boolean>(false)
+    const [data, setData] = useState<any>(null)
+
+    useEffect(() => {
+        let userId:any
+        if (typeof window !== 'undefined'){
+            const user = localStorage.getItem('user');            
+            userId = user
+        } 
+        const fetchData = async () => {
+            const response = await FetchWrapper(`/events/get-events-payment/${eventId}`, 'GET', '',{userId})
+            setData(response.data)
+            if(response?.data?.payment.status !== 'Pago' && response?.data?.payment.status !== 'gratis') {
+                setStatus(true);
+            }
+        }
+        fetchData()
+    }, []) // Dependências vazias significam que o useEffect será executado apenas uma vez quando o componente for montado.
         
     const handlePush = async() => {
         const response = await FetchWrapper(`/events/new-pix/${data.payment.txid}`,'POST')

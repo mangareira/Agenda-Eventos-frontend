@@ -3,9 +3,17 @@ import { FetchWrapper } from "@/app/utils/FetchWrapper"
 import { IPayProps } from "@/app/utils/interface"
 import { Button } from "../Form/Button"
 import { copyPixToClipboard } from "@/app/utils/copyPix"
+import { useEffect, useState } from "react"
 
 export const CardPix = async ({txid}: any) => {  
-    const {data} = await FetchWrapper(`/events/get-pay/${txid}`, 'GET')  
+    const [data, setData] = useState<any>(null)  
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await FetchWrapper(`/events/get-pay/${txid}`, 'GET')
+            setData(response.data)
+        }
+        fetchData()
+    }, [])
     const response: IPayProps = data
     const qrcode = response?.payment.qrCode 
     const pix = response?.payment.pixCopiaECola.slice(0,40).toString() + '...'
