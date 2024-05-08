@@ -42,3 +42,18 @@ export type IPagination = {
     total: number
     classNameDiv?: string
 }
+export interface IPayProps {
+    _id: string
+    eventId: string
+    userId: string
+    payment: {
+        status: string
+        txid: string
+        valor: string
+        qrCode: string
+        pixCopiaECola: string
+        expirationTime: string
+    }
+    tickets: string
+    discount: string
+}

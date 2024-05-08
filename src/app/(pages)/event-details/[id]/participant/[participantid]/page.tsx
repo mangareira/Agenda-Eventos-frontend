@@ -1,12 +1,13 @@
 'use client'
 import { Button } from "@/app/components/Form/Button";
 import { FetchWrapper } from "@/app/utils/FetchWrapper";
+import { copyPixToClipboard } from "@/app/utils/copyPix";
 import React, { useState, useEffect } from "react";
 
 export default function PaymentPage({ params }: { params: { participantid: string } }) {
   const [qrCode, setQrCode] = useState('');
   const [paymentValue, setPaymentValue] = useState<number | string>(0);
-  const [pixCopiaECola, setPixCopiaECola] = useState('');
+  const [pixCopiaECola, setPixCopiaECola] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<any>(null);
 
@@ -30,15 +31,9 @@ export default function PaymentPage({ params }: { params: { participantid: strin
 
     fetchData();
   }, [params.participantid]);
-
-  const copyPixToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(pixCopiaECola);
-      alert('Código PIX copiado para a área de transferência!');
-    } catch (error) {
-      alert('Erro ao copiar o código PIX. Por favor, tente novamente.');
-    }
-  };
+  const handleCopy = () => {
+    copyPixToClipboard(pixCopiaECola)
+  }
 
   return (
     <div className="container mx-auto">
@@ -55,7 +50,7 @@ export default function PaymentPage({ params }: { params: { participantid: strin
           <img src={qrCode} alt="qrcode" className="max-w-xs mx-auto" />
 
           <p className="text-base leading-6 text-gray-500">Copie e cole o PIX: {pixCopiaECola}</p>
-          <Button title="Copie cole"  onClick={copyPixToClipboard} className="hover:bg-blue-600 hover:text-blue"/>
+          <Button title="Copie cole"  onClick={handleCopy} className="hover:bg-blue-600 hover:text-blue"/>
         </div>
       )}
     </div>

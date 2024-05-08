@@ -1,5 +1,4 @@
 'use client'
-
 import { Button } from "@/app/components/Form/Button";
 import { CardFilter } from "@/app/components/Form/CardFilter";
 import { Input } from "@/app/components/Form/Input";
@@ -8,10 +7,10 @@ import { FetchWrapper } from "@/app/utils/FetchWrapper";
 import { categories } from "@/app/utils/categories";
 import { IFormFilter } from "@/app/utils/interface";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useForm } from "react-hook-form";
 
-export default function FilterEvents() {
+function FilterEventsComponent() {
     const searchParams = useSearchParams()
     const [events, setEvents] = useState<any>([])
     const {register, handleSubmit, setValue, reset} = useForm<IFormFilter>()
@@ -101,4 +100,12 @@ export default function FilterEvents() {
             </div>
         </div>
     )
+}
+
+export default function FilterEvents() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <FilterEventsComponent />
+        </Suspense>
+    );
 }
