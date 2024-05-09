@@ -1,5 +1,6 @@
 'use client'
 import { FetchWrapper } from "@/app/utils/FetchWrapper"
+import { useRole } from "@/app/utils/hooks/useRole"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { AiOutlineHome } from "react-icons/ai"
@@ -9,15 +10,7 @@ import { LiaMapMarkedSolid } from "react-icons/lia"
 import { MdOutlineAddBox, MdOutlinePrivacyTip } from "react-icons/md"
 
 export const SideBar = () => {
-    const [role, setRole] = useState('')
-    useEffect(() => {
-        const role = async () => {
-            const id = localStorage.getItem('user')
-            const data = await FetchWrapper(`/events/get-participant/${id}`, 'GET')
-            setRole(data.data)
-        }
-        role()
-    }, [])
+    const {role} = useRole()
     const adminAccess = () => {
         if(role === 'admin') return (
             <Link href={'/create-event'}>
