@@ -3,32 +3,16 @@ import Image from "next/image"
 import { Button } from "@/app/components/Form/Button"
 import { FetchWrapper } from "@/app/utils/FetchWrapper"
 import { usePathname, useRouter } from "next/navigation"
-import { useEffect, useState } from "react";
+import { useStatusHook } from "@/app/utils/hooks/statusHook"
+import { AiOutlineLoading } from "react-icons/ai"
 
 export const CardSubs = ({eventId}: any) => {
     const router = useRouter()
     const pathName = usePathname()
-    const [status, setStatus] = useState<boolean>(false)
-    const [data, setData] = useState<any>(null)
-
-    useEffect(() => {
-        let userId:any
-        if (typeof window !== 'undefined'){
-            const user = localStorage.getItem('user');            
-            userId = user
-        } 
-        const fetchData = async () => {
-            const response = await FetchWrapper(`/events/get-events-payment/${eventId}`, 'GET', '',{userId})
-            setData(response.data)
-            if(response?.data?.payment.status !== 'Pago' && response?.data?.payment.status !== 'gratis') {
-                setStatus(true);
-            }
-        }
-        fetchData()
-    }, []) // Dependências vazias significam que o useEffect será executado apenas uma vez quando o componente for montado.
-        
+    const {data,status} = useStatusHook(eventId)
+    if(!data && !status) return <div className="absolute top-[50%] left-[45%]"><AiOutlineLoading className="animate-spin text-blue" size={30}/></div>
     const handlePush = async() => {
-        const response = await FetchWrapper(`/events/new-pix/${data.payment.txid}`,'POST')
+        const response = await FetchWrapper(`/events/new-pix/${data?.payment.txid}`,'POST')
         router.push(`${pathName}/new-pix?txid=${response.data.payment.txid}`)
     }
     

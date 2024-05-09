@@ -1,24 +1,17 @@
 'use client'
-import { FetchWrapper } from "@/app/utils/FetchWrapper"
-import { IPayProps } from "@/app/utils/interface"
 import { Button } from "../Form/Button"
 import { copyPixToClipboard } from "@/app/utils/copyPix"
-import { useEffect, useState } from "react"
+import { usePaymentHook } from "@/app/utils/hooks/paymentHook"
+import { AiOutlineLoading } from "react-icons/ai"
 
-export const CardPix = async ({txid}: any) => {  
-    const [data, setData] = useState<any>(null)  
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await FetchWrapper(`/events/get-pay/${txid}`, 'GET')
-            setData(response.data)
-        }
-        fetchData()
-    }, [])
-    const response: IPayProps = data
-    const qrcode = response?.payment.qrCode 
-    const pix = response?.payment.pixCopiaECola.slice(0,40).toString() + '...'
+export const CardPix = ({txid}: any) => {  
+    const {data} = usePaymentHook(txid)
+    if(!data) return <div className="absolute top-[50%] left-[45%]"><AiOutlineLoading className="animate-spin text-blue" size={30}/></div>
+    const qrcode = data?.payment.qrCode 
+    const pix = data?.payment.pixCopiaECola.slice(0,40).toString() + '...'
+    const pixCola: any = data?.payment.pixCopiaECola
     const handleCopy = () => {
-        copyPixToClipboard(response?.payment.pixCopiaECola)
+        copyPixToClipboard(pixCola)
     }
     return (
         <div className="container mx-auto">
@@ -29,7 +22,7 @@ export const CardPix = async ({txid}: any) => {
                     </div>
                     <div className="text-blue">
                         <div className="text-center font-medium text-2xl mt-5">
-                            Valor: {new Intl.NumberFormat('pt-BR', {style: 'currency', currency: 'BRL'}).format(Number(response?.payment.valor))}
+                            Valor: {new Intl.NumberFormat('pt-BR', {style: 'currency', currency: 'BRL'}).format(Number(data?.payment.valor))}
                         </div>
                         <div className="font-light my-5">
                             {pix}
