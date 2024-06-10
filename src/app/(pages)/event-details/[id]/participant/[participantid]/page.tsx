@@ -34,25 +34,33 @@ export default function PaymentPage({ params }: { params: { participantid: strin
   const handleCopy = () => {
     copyPixToClipboard(pixCopiaECola)
   }
-
+  const pix = pixCopiaECola.slice(0,40).toString() + '...'
   return (
     <div className="container mx-auto">
-      <h1 className="text-2xl font-bold text-gray-900">Detalhes do Pagamento</h1>
-
-      {isLoading ? (
-        <p className="text-base leading-6 text-gray-500">Carregando...</p>
-      ) : error ? (
-        <p className="text-base leading-6 text-red-500">Erro ao carregar os dados. Por favor, tente novamente mais tarde.</p>
-      ) : (
-        <div className="flex flex-col items-center">
-          <p className="text-base leading-6 text-gray-500">Valor: R${paymentValue}</p>
-
-          <img src={qrCode} alt="qrcode" className="max-w-xs mx-auto" />
-
-          <p className="text-base leading-6 text-gray-500">Copie e cole o PIX: {pixCopiaECola}</p>
-          <Button title="Copie cole"  onClick={handleCopy} className="hover:bg-blue-600 hover:text-blue"/>
+        <div className="py-2">
+            <div className="text-blue">
+                <div className="font-medium text-2xl">Detalhe do pagemento</div>
+                <div className="font-light text-sm">Aqui podera ver os detalhes do pix</div>
+                <div className="container mx-auto">
+                    <div className="h-[77vh]">
+                        <div className="flex flex-col items-center w-full">
+                            <div className="w-[350px] h-72 bg-white shadow-md rounded-xl flex items-center">
+                                <img src={qrCode} alt="qrcode" className="max-w-xs mx-auto" />
+                            </div>
+                            <div className="text-blue">
+                                <div className="text-center font-medium text-2xl mt-5">
+                                    Valor: {new Intl.NumberFormat('pt-BR', {style: 'currency', currency: 'BRL'}).format(Number(paymentValue))}
+                                </div>
+                                <div className="font-light my-5">
+                                    {pix}
+                                </div>
+                                <Button title="Copia Pix" onClick={handleCopy}/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      )}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { toast } from "react-toastify";
 import { FetchWrapper } from "../FetchWrapper";
-import {  IAccount, IFormProps, ILogin, IParticipants } from "../interface";
+import {  IAccount, IAccountPayload, IFormProps, ILogin, IParticipants } from "../interface";
+import { IEmail } from "@/app/(admin)/dashboard/events/[id]/participant/add/page";
 
 
 
@@ -70,7 +71,17 @@ export const onSubimtCreateAccount = async (data: IAccount) => {
     if(response.status === 201) {
         toast.success("Conta criada com sucesso")
     } 
-    console.log(response);
+        
+    return response 
+}
+export const onSubimtAddParticipantWithEmail = async (data: IEmail, eventId: string) => {
+    const response =  await FetchWrapper(`/events/add-with-email/participants`, 'POST','',{email:data.email,tickets: data.tickets,discount: data.discount, eventId})          
+    if(response.code === 'ERR_BAD_REQUEST'){
+        toast.error(response.response.data.message)
+    }
+    if(response.status === 200) {
+        toast.success("Usuario adicionado com sucesso")
+    } 
         
     return response 
 }

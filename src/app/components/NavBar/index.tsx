@@ -8,11 +8,20 @@ import { Button } from "../Form/Button"
 import { HiUserCircle } from "react-icons/hi2"
 import { FaAngleDown } from "react-icons/fa6"
 import { useEvents } from "@/app/utils/hooks/useEvents"
+import { useRole } from "@/app/utils/hooks/useRole"
 
 export const NavBar = () => {
 
     const [showDropdown, setShowDropdown] = useState(false)
     const {isLoggedIn, relatedEvents,search,setSearch} = useEvents()
+    const {role} = useRole()
+    const adminAccess = () => {
+        if(role === 'admin') return (
+            <Link href={'/dashboard'}>
+                <li className="cursor-pointer text-end w-32 h-8 hover:bg-blue-600 bg-blue pr-2">Dashboard</li>
+            </Link>
+        )
+    }
     const handleEventClick = () => {
         setSearch('')
     }
@@ -60,21 +69,23 @@ export const NavBar = () => {
                     </div>
                 ) : (
                     <>
-                        <div className="flex items-center">
+                        <div className="relative flex items-center">
                             <HiUserCircle size={35} color="white" />
                             <FaAngleDown color="white" className="ml-4" onClick={toggleDropdown}/>
                             {showDropdown && (
-                                <div className="absolute top-14 right-56  text-white shadow-md z-10">
+                                <div className="absolute top-full right-0 text-white shadow-md z-10">
                                     <ul className="">
                                         <Link href={'/profile/my-events'}>
                                             <li className="cursor-pointer text-end w-32 h-8 hover:bg-blue-600 bg-blue pr-2">Meus Eventos</li>
                                         </Link>
+                                        {adminAccess()}
                                         <li onClick={out} className="cursor-pointer text-end w-32 h-8 hover:bg-blue-600 bg-blue pr-2 rounded-b-lg">Sair</li>
                                     </ul>
                                 </div>
                             )}
                         </div>
                     </>
+
                 )}
             </div>
         </nav>

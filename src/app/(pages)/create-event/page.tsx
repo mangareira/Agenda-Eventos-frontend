@@ -22,7 +22,7 @@ export default  function CreateEvent() {
     useEffect(() => {
         const role = async () => {
             const id = localStorage.getItem('user')
-            const data = await FetchWrapper(`/events/get-participant/${id}`, 'GET')
+            const data = await FetchWrapper(`/events/get-participant-role/${id}`, 'GET')
             setRole(data.data)
         }
         role()

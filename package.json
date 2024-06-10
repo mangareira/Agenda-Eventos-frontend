@@ -9,20 +9,28 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.3.7",
     "@react-google-maps/api": "^2.19.3",
+    "antd": "^5.17.3",
     "axios": "^1.6.7",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.51.0",
     "react-icons": "^5.0.1",
     "react-qr-code": "^2.0.12",
-    "react-toastify": "^10.0.4"
+    "react-spinkit": "^3.0.0",
+    "react-toastify": "^10.0.4",
+    "recharts": "^2.12.7",
+    "use-debounce": "^10.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-spinkit": "^3.0.10",
     "autoprefixer": "^10.0.1",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",

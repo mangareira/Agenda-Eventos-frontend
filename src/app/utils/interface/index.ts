@@ -1,3 +1,5 @@
+import { ReactNode } from "react"
+
 export interface IFormFilter {
     name: string
     categories: string
@@ -35,6 +37,14 @@ export interface IAccount {
     email: string
     cpf: string
     password: string
+    role?: string
+}
+export interface IAccountPayload{
+    name: string
+    email: string
+    cpf: string
+    password: string
+    role: string
 }
 export type IPagination = {
     page: number 
@@ -56,4 +66,74 @@ export interface IPayProps {
     }
     tickets: string
     discount: string
+}
+export type IItem = {
+    item: {
+        icon: ReactNode
+        title: string
+        path: string
+    }
+}
+export type ISearch = {
+    placeholder : string
+}
+export interface IUsersPayload {
+    _id: string
+    name: string
+    email: string
+    cpf: string
+    password: string
+    eventos: string[]
+    role: string
+    createdAt: string
+}
+export type IUsers = {
+    users: IUsersPayload,
+    deleteUserFromState: (id: string) => void
+    eventId?: string
+}
+type Price = {
+    amount: string
+    sector: string
+}
+export interface IEventsPayload {
+    _id: string
+    title: string
+    location: {
+        latitute: string
+        longitude: string
+    }
+    date: string
+    coupons: string[]
+    description: string
+    categories: string[]
+    banner: string
+    flyers: string[]
+    price: Price[]
+    city: string
+    formattedAddress: string
+    participants: string[]
+    createdAt: string
+}
+export type IEvents = {
+    events: IEventsPayload
+    deleteEventFromState: (id: string) => void,
+    userId?: string
+}
+export type IQuery ={
+    q: string
+    page: number,
+    id?: string | any
+}
+export type IPayLoad = {
+    name: string
+    status: string,
+    _id: string,
+    value: string,
+    userId: string,
+    createdAt: string
+}
+export type IPay = {
+    payments: IPayLoad
+    deletePaymentFromState: (id: string) => void,
 }

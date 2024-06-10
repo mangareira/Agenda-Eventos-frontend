@@ -11,7 +11,7 @@ export default function EventDetailsPage({params}: {params: {id: string}}) {
 
     useEffect(() => {
         async function fetchData() {
-            const {data} = await FetchWrapper(`/events/${params.id}`, 'GET')
+            const {data} = await FetchWrapper(`/events/get-events/${params.id}`, 'GET')
             setData(data)
         }
         fetchData();
