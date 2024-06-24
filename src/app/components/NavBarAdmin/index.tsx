@@ -1,7 +1,8 @@
 "use client"
 
+import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { MdNotifications, MdOutlineChat, MdPublic, MdSearch } from "react-icons/md"
+import { MdImportExport,  MdOutlineChat, MdPublic, MdSearch } from "react-icons/md"
 
 export const NavBarAdmin = () => {
     const pathName = usePathname()
@@ -15,7 +16,9 @@ export const NavBarAdmin = () => {
                 </div>
                 <div className="flex gap-5">
                     <MdOutlineChat size={20}/>
-                    <MdNotifications size={20}/>
+                    <Link href={'?modal=true'}>
+                        <MdImportExport size={20}/>
+                    </Link>
                     <MdPublic size={20}/> 
                 </div>
             </div>

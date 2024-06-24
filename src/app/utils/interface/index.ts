@@ -135,5 +135,15 @@ export type IPayLoad = {
 }
 export type IPay = {
     payments: IPayLoad
-    deletePaymentFromState: (id: string) => void,
+    deletePaymentFromState?: (id: string) => void,
+}
+export type IExport = {
+    tableType: string
+    startDate: string
+    endDate: string
+}
+export type IChart = {
+    name: string
+    events: number
+    users: number
 }

@@ -1,11 +1,9 @@
-import Image from "next/image"
+import { useTableTrans } from "@/app/utils/hooks/useTableTrans"
+import { TableTrans } from "../../TableTrans"
 
 export const Transactions = () => {
-    const data = {
-        pending: "bg-[#f7cb7375]",
-        cancelled: "bg-[#f7747475]",
-        done: "bg-[#afd6ee75]"
-    }
+    const {payments} = useTableTrans()
+
     return (
         <div className="bg-green_admin p-5 rounded-[10px]">
             <h2 className="mb-5 text-xl  font-extralight text-gray-300" >Lastest Transactions</h2>
@@ -19,58 +17,9 @@ export const Transactions = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td className="p-[10px]">
-                            <div className="flex gap-[10px] items-center">
-                                <Image src="/noavatar.png" alt="" width={40} height={40} className="object-cover rounded-3xl" />
-                                jhon Doe
-                            </div>
-                        </td>
-                        <td className="p-[10px]">
-                            <span className={`${"rounded-md p-[5px] text-sm"} ${data.pending} `}>Pending</span>
-                        </td>
-                        <td className="p-[10px]">14.02.2024</td>
-                        <td className="p-[10px]">$3.200</td>
-                    </tr>
-                    <tr>
-                        <td className="p-[10px]">
-                            <div className="flex gap-[10px] items-center">
-                                <Image src="/noavatar.png" alt="" width={40} height={40} className="object-cover rounded-3xl" />
-                                jhon Doe
-                            </div>
-                        </td>
-                        <td className="p-[10px]">
-                            <span className={`${"rounded-md p-[5px] text-sm"} ${data.done} `}>Done</span>
-                        </td>
-                        <td className="p-[10px]">14.02.2024</td>
-                        <td className="p-[10px]">$3.200</td>
-                    </tr>
-                    <tr>
-                        <td className="p-[10px]">
-                            <div className="flex gap-[10px] items-center">
-                                <Image src="/noavatar.png" alt="" width={40} height={40} className="object-cover rounded-3xl" />
-                                jhon Doe
-                            </div>
-                        </td>
-                        <td className="p-[10px]">
-                            <span className={`${"rounded-md p-[5px] text-sm"} ${data.pending} `}>Pending</span>
-                        </td>
-                        <td className="p-[10px]">14.02.2024</td>
-                        <td className="p-[10px]">$3.200</td>
-                    </tr>
-                    <tr>
-                        <td className="p-[10px]">
-                            <div className="flex gap-[10px] items-center">
-                                <Image src="/noavatar.png" alt="" width={40} height={40} className="object-cover rounded-3xl" />
-                                jhon Doe
-                            </div>
-                        </td>
-                        <td className="p-[10px]">
-                            <span className={`${"rounded-md p-[5px] text-sm"} ${data.cancelled} `}>Cancelled</span>
-                        </td>
-                        <td className="p-[10px]">14.02.2024</td>
-                        <td className="p-[10px]">$3.200</td>
-                    </tr>
+                    {payments.map((trans, index) => (
+                        <TableTrans payments={trans} key={index}/>
+                    ))}
                 </tbody>
             </table>
         </div>

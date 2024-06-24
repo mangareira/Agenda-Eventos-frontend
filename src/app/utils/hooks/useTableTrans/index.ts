@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { IPayLoad, IPayProps } from "../../interface";
 import { FetchWrapper } from "../../FetchWrapper";
 
-export const useTableTrans = (query: string, pageUrl: number) => {
+export const useTableTrans = (query?: string, pageUrl?: number) => {
     const [payments, setPayments] = useState<IPayLoad[]>([]);
     const [count, setCount] = useState<number>();
     const q = query || "";

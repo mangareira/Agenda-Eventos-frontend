@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import { FetchWrapper } from "../FetchWrapper";
-import {  IAccount, IAccountPayload, IFormProps, ILogin, IParticipants } from "../interface";
+import {  IAccount, IAccountPayload, IExport, IFormProps, ILogin, IParticipants } from "../interface";
 import { IEmail } from "@/app/(admin)/dashboard/events/[id]/participant/add/page";
 
 
@@ -78,10 +78,46 @@ export const onSubimtAddParticipantWithEmail = async (data: IEmail, eventId: str
     const response =  await FetchWrapper(`/events/add-with-email/participants`, 'POST','',{email:data.email,tickets: data.tickets,discount: data.discount, eventId})          
     if(response.code === 'ERR_BAD_REQUEST'){
         toast.error(response.response.data.message)
-    }
+    }   
     if(response.status === 200) {
         toast.success("Usuario adicionado com sucesso")
     } 
         
     return response 
 }
+export const onSubmitExport = async (data: IExport) => {
+    try {
+        // Formatar as datas
+        const startDate = new Date(data.startDate).toISOString();
+        const endDate = new Date(data.endDate).toISOString();
+
+        // Fazer a requisição POST para o backend
+        const response = await fetch('http://localhost:3333/events/exports', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ ...data, startDate, endDate })
+        });
+
+        if (!response.ok) {
+            const errorResponse = await response.json();
+            toast.error(errorResponse.message || "Failed to download the file");
+            return;
+        }
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+
+        window.URL.revokeObjectURL(url);
+        toast.success("Arquivo exportado com sucesso!");
+
+    } catch (error) {
+        console.error('Erro ao exportar os dados:', error);
+        toast.error("Erro ao exportar os dados.");
+    }
+};
