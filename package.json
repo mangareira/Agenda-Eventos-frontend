@@ -25,6 +25,7 @@
     "react-spinkit": "^3.0.0",
     "react-toastify": "^10.0.4",
     "recharts": "^2.12.7",
+    "sharp": "^0.33.4",
     "use-debounce": "^10.0.0"
   },
   "devDependencies": {
