@@ -3,7 +3,7 @@ import Link from "next/link";
 import { IoClose } from "react-icons/io5";
 import { toast } from "react-toastify";
 
-export const ModalConfirmCert = ({ isOpen, events }: ModalCert) => {
+export const ModalConfirmCert = ({ isOpen, id }: ModalCert) => {
   const download = async () => {
     let userId;
     let tokenLoc;
@@ -13,7 +13,7 @@ export const ModalConfirmCert = ({ isOpen, events }: ModalCert) => {
       tokenLoc = localStorage.getItem('token');
     }
 
-    const response = await fetch(`http://localhost:3333/events/my-certificate?userId=${userId}&eventId=${events?._id}`, {
+    const response = await fetch(`http://localhost:3333/events/my-certificate?userId=${userId}&eventId=${id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

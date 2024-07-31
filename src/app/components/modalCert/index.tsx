@@ -3,11 +3,11 @@ import { ModalError } from "./modalError";
 import { ModalConfirmCert } from "./modalConfirmCert";
 import dayjs from "dayjs"
 
-    export const Modal = ({ isOpen, onRefresh, events }: ModalCert) => {
+    export const Modal = ({ isOpen, onRefresh, id, eventDate }: ModalCert) => {
         if(!isOpen) return null 
         return (
             <div className="">
-                {dayjs(events?.date).isBefore(new Date()) ?  <ModalConfirmCert isOpen={isOpen} onRefresh={onRefresh} events={events}/>: <ModalError isOpen={isOpen} onRefresh={onRefresh}/>}
+                {dayjs(eventDate).isBefore(new Date()) ?  <ModalConfirmCert isOpen={isOpen} onRefresh={onRefresh} id={id}/>: <ModalError isOpen={isOpen} onRefresh={onRefresh}/>}
             </div>
         )
     }

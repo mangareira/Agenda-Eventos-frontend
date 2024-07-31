@@ -151,5 +151,6 @@ export type IChart = {
 export type ModalCert = {
     isOpen: boolean
     onRefresh: () => void
-    events?: IEventsPayload
+    id?: string,
+    eventDate?: string
 }

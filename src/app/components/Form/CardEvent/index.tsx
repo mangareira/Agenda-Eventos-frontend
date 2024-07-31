@@ -5,19 +5,7 @@ import { Modal } from "../../modalCert"
 export const CardEvent = ({events, params}: any) => {
     const formatedAdress = events.formattedAddress.split(',')  
     const date = new Date(events.date)  
-    const handleRefresh = () => {
-        window.location.reload()
-    };
-    const showModal = () => {
-        if(params == 'true') {
-            return <Modal 
-                        isOpen={params}
-                        onRefresh={handleRefresh}
-                        events={events}
-                    />
-        }
-        return
-    }
+    
     return (
             <div className="w-[600px] h-[150px] rounded-md shadow">
                 <div className="p-2 text-blue ">
@@ -31,7 +19,7 @@ export const CardEvent = ({events, params}: any) => {
                         <Link href={`/profile/my-events/${events._id}/subscribe`}>
                             <div className="">Inscrição</div>
                         </Link>
-                        <Link href={`?modal=true`}>
+                        <Link href={`?modal=true&eventId=${events._id}&eventDate=${events.date}`}>
                             <div className="">Certificado</div>
                         </Link>
                         <Link href={`/event-details/${events._id}`}>
@@ -39,7 +27,6 @@ export const CardEvent = ({events, params}: any) => {
                         </Link>
                     </div>
                 </div>
-                {showModal()}
             </div>
     )
 }

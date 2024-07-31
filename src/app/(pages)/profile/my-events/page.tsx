@@ -1,12 +1,13 @@
 'use client'
 import { CardEvent } from "@/app/components/Form/CardEvent"
+import { Modal } from "@/app/components/modalCert"
 import { Pagination } from "@/app/components/Pagination"
 import { FetchWrapper } from "@/app/utils/FetchWrapper"
 import { useEffect, useState } from "react"
 import { AiOutlineLoading } from "react-icons/ai"
 type PageProps = {
-    searchParams?: {page?: string; limit?: string; modal?: string}
-    params?:{id?: string} 
+    searchParams?: {page?: string; limit?: string; modal?:string; eventId?: string; eventDate: string}
+    params:{id: string} 
 }
 export default function myEvents ({searchParams, params}: PageProps) {
     const page = Number(searchParams?.page) || 1
@@ -24,6 +25,21 @@ export default function myEvents ({searchParams, params}: PageProps) {
         }
         result()
     }, [])    
+    const handleRefresh = () => {
+        window.location.reload()
+    };
+    const showModal = () => {
+        
+        if(searchParams?.modal == 'true') {
+            return <Modal 
+                        isOpen={Boolean(modal)}
+                        onRefresh={handleRefresh}
+                        id={searchParams.eventId}
+                        eventDate={searchParams.eventDate}
+                    />
+        }
+        return
+    }
     
     const p = () => {
         if(!quantity) {
@@ -46,6 +62,7 @@ export default function myEvents ({searchParams, params}: PageProps) {
                     </div>
                 </div>
                 {p()}
+                {showModal()}
             </div>
         </div>
     )
