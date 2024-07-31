@@ -121,3 +121,12 @@ export const onSubmitExport = async (data: IExport) => {
         toast.error("Erro ao exportar os dados.");
     }
 };
+
+export const onSendCertificate = async (params: string) => {
+    try {
+        await FetchWrapper(`/events/certificate`, 'POST', '', {id: params})
+        toast.success("Certificados enviados com sucesso")
+    } catch (error) {
+        console.log(error)
+    }
+}

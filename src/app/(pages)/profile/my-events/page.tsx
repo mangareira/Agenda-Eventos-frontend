@@ -2,14 +2,16 @@
 import { CardEvent } from "@/app/components/Form/CardEvent"
 import { Pagination } from "@/app/components/Pagination"
 import { FetchWrapper } from "@/app/utils/FetchWrapper"
-import { ReactNode, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { AiOutlineLoading } from "react-icons/ai"
 type PageProps = {
-    searchParams?: {page?: string; limit?: string}
+    searchParams?: {page?: string; limit?: string; modal?: string}
+    params?:{id?: string} 
 }
-export default function myEvents ({searchParams}: PageProps) {
+export default function myEvents ({searchParams, params}: PageProps) {
     const page = Number(searchParams?.page) || 1
     const limit = Number(searchParams?.limit) ||6
+    const modal = searchParams?.modal
     const [events, setEvents] = useState([])
     const [quantity, setQuantity] = useState<Number | any>()
 
@@ -22,6 +24,7 @@ export default function myEvents ({searchParams}: PageProps) {
         }
         result()
     }, [])    
+    
     const p = () => {
         if(!quantity) {
             return <div className="absolute top-[50%] left-[45%]"><AiOutlineLoading className="animate-spin text-blue" size={30}/></div>
@@ -38,7 +41,7 @@ export default function myEvents ({searchParams}: PageProps) {
                 <div className="h-[83%]">
                     <div className="grid grid-cols-2 gap-4">
                         {events.map((e: any, index: any) => (
-                            <CardEvent events={e} key={index}/>
+                            <CardEvent events={e} key={index} params={modal} />
                         ))}
                     </div>
                 </div>
