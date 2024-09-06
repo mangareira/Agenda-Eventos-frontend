@@ -6,7 +6,6 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 export const Pagination = ({page, limit, total, classNameDiv}: IPagination) => {
     const pathName = usePathname()
     const seachParams = useSearchParams()
-    const router = useRouter()
     const {pages, isCurrentPage} =  usePagination({page,limit,total})   
     const generateUrl = (page: number) => {
         const params = new URLSearchParams(seachParams)
