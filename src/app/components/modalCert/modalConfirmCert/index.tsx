@@ -13,7 +13,7 @@ export const ModalConfirmCert = ({ isOpen, id }: ModalCert) => {
       tokenLoc = localStorage.getItem('token');
     }
 
-    const response = await fetch(`http://localhost:3333/events/my-certificate?userId=${userId}&eventId=${id}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events/my-certificate?userId=${userId}&eventId=${id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

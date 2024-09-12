@@ -3,7 +3,7 @@ import { Button } from "../Button"
 
 export const CardFilter = ({event}: any) => {
     const data = new Date(event.date)
-    const image = `http://localhost:3333/uploads/${event.banner}`
+    const image = `${process.env.NEXT_PUBLIC_API_URL}/uploads/${event.banner}`
     const address = event.formattedAddress.split('-') 
     return (
         <div className="rounded mb-6 ">

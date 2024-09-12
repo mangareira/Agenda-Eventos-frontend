@@ -8,7 +8,7 @@ export const FetchWrapper = async (url: string, method: Method, body?: any, para
         }     
     try {
         const data:any = await axios.request({
-            url: `http://localhost:3333${url}`,
+            url: `${process.env.NEXT_PUBLIC_API_URL}${url}`,
             method,
             data: body,
             headers: {

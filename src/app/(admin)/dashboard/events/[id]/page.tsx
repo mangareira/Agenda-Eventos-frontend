@@ -27,7 +27,7 @@ function Event({ params, searchParams }: { params: { id: string }, searchParams:
     }, [event, setValue]);
     if(!event) return <div className="absolute top-[50%] left-[45%]"><AiOutlineLoading className="animate-spin text-blue" size={30}/></div>
     const date = new Date(String(event?.date))
-    const banner = `http://localhost:3333/uploads/${event?.banner}`  
+    const banner = `${process.env.NEXT_PUBLIC_API_URL}/uploads/${event?.banner}`  
     const submit = async (data: IEventsPayload) => {
         if(!event?._id) return toast.error("id is required")
         await updateEvent(data,event?._id)

@@ -15,7 +15,7 @@ export default function Categories({searchParams}: {searchParams: {page: string,
 
     
     const getEvents = async (value: any) => {                        
-        const response = await FetchWrapper(`/events/category/${value}`, 'GET' )        
+        const response = await FetchWrapper(`/events/category/${value}`, 'GET' )
         setEvents(response.data.events) 
         setQuantity(response.data.quantity)                   
     } 

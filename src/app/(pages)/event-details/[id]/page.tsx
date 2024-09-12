@@ -21,8 +21,8 @@ export default function EventDetailsPage({params}: {params: {id: string}}) {
             <div className="">...loading</div>
         )
     }
-    const image = `http://localhost:3333/uploads/${data.banner}`
-    const flyer = `http://localhost:3333/uploads/${data.flyers[0]}`
+    const image = `${process.env.NEXT_PUBLIC_API_URL}/uploads/${data.banner}`
+    const flyer = `${process.env.NEXT_PUBLIC_API_URL}/uploads/${data.flyers[0]}`
     const date = new Date(data.date)
     const handleCloseError = () => {
         setState(""); 

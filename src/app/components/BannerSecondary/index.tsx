@@ -4,7 +4,7 @@ export const BannerSecondary = ({events}: any) => {
     
     const date = new Date(events.date)
     
-    const image = `http://localhost:3333/uploads/${events.banner}`
+    const image = `${process.env.NEXT_PUBLIC_API_URL}/uploads/${events.banner}`
 
     const address = events.formattedAddress.split('-')    
     return (

@@ -92,7 +92,7 @@ export const onSubmitExport = async (data: IExport) => {
         const endDate = new Date(data.endDate).toISOString();
 
         // Fazer a requisição POST para o backend
-        const response = await fetch('http://localhost:3333/events/exports', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events/exports`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

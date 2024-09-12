@@ -4,7 +4,7 @@ export const BannerPrimary = ({events}: any) => {
     
     const date = new Date(events.date)
     
-    const image = `http://localhost:3333/uploads/${events.banner}`
+    const image = `${process.env.NEXT_PUBLIC_API_URL}/uploads/${events.banner}`
     
     return (
         <Link href={`/event-details/${events._id}`}>

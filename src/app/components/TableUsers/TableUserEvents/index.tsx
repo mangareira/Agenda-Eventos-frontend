@@ -6,7 +6,7 @@ import React from 'react'
 export const TableEventsUser = ({events, deleteEventFromState,userId}: IEvents,) => {
     const date = new Date(events.createdAt)
     const minName = events.title.slice(0,25).toString() + '.'
-    const banner = `http://localhost:3333/uploads/${events.banner}`
+    const banner = `${process.env.NEXT_PUBLIC_API_URL}/uploads/${events.banner}`
     const price = () => {
         if(events.price[0].amount === "") return "gratís"
         return events.price[0].amount
