@@ -5,15 +5,26 @@ import { FetchWrapper } from "@/app/utils/FetchWrapper"
 import { usePathname, useRouter } from "next/navigation"
 import { useStatusHook } from "@/app/utils/hooks/statusHook"
 import { AiOutlineLoading } from "react-icons/ai"
+import { toast } from "react-toastify"
 
 export const CardSubs = ({eventId}: any) => {
     const router = useRouter()
     const pathName = usePathname()
     const {data,status} = useStatusHook(eventId)
+    let userId:any
+    if (typeof window !== 'undefined'){
+        const user = localStorage.getItem('user');            
+        userId = user
+    }  
     if(!data && !status) return <div className="absolute top-[50%] left-[45%]"><AiOutlineLoading className="animate-spin text-blue" size={30}/></div>
     const handlePush = async() => {
         const response = await FetchWrapper(`/events/new-pix/${data?.payment.txid}`,'POST')
         router.push(`${pathName}/new-pix?txid=${response.data.payment.txid}`)
+    }
+    const handleCancelled = async() => {
+        await FetchWrapper("/events/cancelled-sub", "PUT", "", {eventId, userId, })
+        toast.success("Inscrição cancelada")
+        router.back()
     }
     
     return(
@@ -35,7 +46,7 @@ export const CardSubs = ({eventId}: any) => {
             </div>
             <div className="w-[460px] mt-5">
                 <div className="flex mx-5">
-                    <Button title="Cancelar inscrição" className="mr-3 text-blue bg-white border border-blue"/>
+                    <Button title="Cancelar inscrição" className="mr-3 text-blue bg-white border border-blue" onClick={handleCancelled}/>
                     {status ?
                         <Button title="gerar novo pix" className="ml-3" onClick={handlePush}/>
                     :

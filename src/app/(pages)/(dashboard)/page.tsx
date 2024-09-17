@@ -1,16 +1,28 @@
+"use client"
 import { BannerPrimary } from "@/app/components/BannerPrimary";
 import { BannerSecondary } from "@/app/components/BannerSecondary";
 import { FetchWrapper } from "@/app/utils/FetchWrapper";
 import { categories } from "@/app/utils/categories";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-export default async function DashBoard(){
-    const response = await FetchWrapper("/events/main", 'GET') 
+
+export default  function DashBoard(){
+
+    const [main, setMain] = useState<any>([])
+
+    const response = async () => {
+        const response = await FetchWrapper("/events/main", 'GET')
+        setMain(response.data)
+    } 
+    useEffect(() =>{
+        response()
+    }, [])
     
     
-    const secondary = response.data.slice(1)         
+    const secondary = main.slice(1)         
     const error = () => {
-        if (!response.data.length) {
+        if (!main.length) {
             return (
               <div className="w-full h-[280px] relative rounded-3xl shadow  flex justify-center items-center ">
                 <p className="text-blue font-medium" >Não existe evento para esta data</p>
@@ -30,7 +42,7 @@ export default async function DashBoard(){
     
     return (
         <div className="container mx-auto ">
-            {response.data && response.data[0] && <BannerPrimary events={response.data[0]} />}
+            {main && main[0] && <BannerPrimary events={main[0]} />}
             <div className="">{error()}</div>
             <div className="p-2 text-blue">
                 <p className="text-2xl font-medium">Eventos em Destaque</p>

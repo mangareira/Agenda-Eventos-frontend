@@ -14,6 +14,8 @@ export default function login() {
         const result = await onSubimtLogin(data)
         if(result.status === 200) {
             router.push('/')
+            await new Promise(resolve => setTimeout(resolve, 700))
+            document.location.reload()
         }
         
     }
