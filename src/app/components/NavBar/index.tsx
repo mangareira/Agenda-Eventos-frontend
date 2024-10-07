@@ -13,7 +13,7 @@ import { useMobile } from "@/app/utils/context"
 
 export const NavBar = () => {
     const [showDropdown, setShowDropdown] = useState(false)
-    const [largura, setLargura] = useState<number>(1024)
+    const [largura, setLargura] = useState<number>(0)
     const {setMobile, mobile} = useMobile()
     const {isLoggedIn, relatedEvents,search,setSearch} = useEvents()
     const {role} = useRole()
@@ -27,6 +27,7 @@ export const NavBar = () => {
         return "/profile/my-events"
     }
     useEffect(() => {
+        setLargura(window.innerWidth)
         if(window.innerWidth > 1024) {
             setMobile(true)
         }
