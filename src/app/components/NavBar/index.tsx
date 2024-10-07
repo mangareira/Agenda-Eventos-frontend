@@ -12,13 +12,8 @@ import { useRole } from "@/app/utils/hooks/useRole"
 import { useMobile } from "@/app/utils/context"
 
 export const NavBar = () => {
-    let width:any 
-    if (typeof window !== 'undefined'){
-        const user = window.innerWidth;            
-        width = user
-    }
     const [showDropdown, setShowDropdown] = useState(false)
-    const [largura, setLargura] = useState<number>(width)
+    const [largura, setLargura] = useState<number>(1024)
     const {setMobile, mobile} = useMobile()
     const {isLoggedIn, relatedEvents,search,setSearch} = useEvents()
     const {role} = useRole()
