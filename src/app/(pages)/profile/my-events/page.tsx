@@ -3,6 +3,7 @@ import { CardEvent } from "@/app/components/Form/CardEvent"
 import { Modal } from "@/app/components/modalCert"
 import { Pagination } from "@/app/components/Pagination"
 import { FetchWrapper } from "@/app/utils/FetchWrapper"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { AiOutlineLoading } from "react-icons/ai"
 type PageProps = {
@@ -54,8 +55,8 @@ export default function myEvents ({searchParams, params}: PageProps) {
                     <div className="text-2xl font-medium">Meus Eventos</div>
                     <div className=" text-base font-light ">Aqui podera ver todos seus eventos</div>
                 </div>
-                <div className="h-[83%]">
-                    <div className="grid grid-cols-2 gap-4">
+                <div className="lg:h-[83%] h-[90%]">
+                    <div className="lg:grid lg:grid-cols-2 lg:gap-4">
                         {events.map((e: any, index: any) => (
                             <CardEvent events={e} key={index} params={modal} />
                         ))}

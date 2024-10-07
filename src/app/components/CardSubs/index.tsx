@@ -19,17 +19,19 @@ export const CardSubs = ({eventId}: any) => {
     if(!data && !status) return <div className="absolute top-[50%] left-[45%]"><AiOutlineLoading className="animate-spin text-blue" size={30}/></div>
     const handlePush = async() => {
         const response = await FetchWrapper(`/events/new-pix/${data?.payment.txid}`,'POST')
+        console.log(response, data);
+        
         router.push(`${pathName}/new-pix?txid=${response.data.payment.txid}`)
     }
     const handleCancelled = async() => {
         await FetchWrapper("/events/cancelled-sub", "PUT", "", {eventId, userId, })
         toast.success("Inscrição cancelada")
-        router.back()
+        router.push("/profile/my-events")
     }
     
     return(
         <>
-            <div className="w-[460px] h-64 shadow-lg rounded-2xl flex">
+            <div className="lg:w-[460px] w-full h-64 shadow-lg rounded-2xl flex">
                 {status ? <div className="w-4 h-full bg-yellow-500 rounded-s-2xl"></div> : <div className="w-4 h-full bg-green-500 rounded-s-2xl"></div> }
                 <div className="flex flex-col items-center w-full">
                     <div className="flex">
@@ -44,9 +46,9 @@ export const CardSubs = ({eventId}: any) => {
                     </div>
                 </div>
             </div>
-            <div className="w-[460px] mt-5">
-                <div className="flex mx-5">
-                    <Button title="Cancelar inscrição" className="mr-3 text-blue bg-white border border-blue" onClick={handleCancelled}/>
+            <div className="lg:w-[460px] w-full mt-5">
+                <div className="flex mx-3">
+                    <Button title="Cancelar inscrição" className="mr-3 text-blue bg-white border border-blue max-sm:px-0" onClick={handleCancelled}/>
                     {status ?
                         <Button title="gerar novo pix" className="ml-3" onClick={handlePush}/>
                     :

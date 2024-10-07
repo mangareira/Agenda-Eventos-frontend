@@ -48,7 +48,7 @@ export default  function DashBoard(){
                 <p className="text-2xl font-medium">Eventos em Destaque</p>
                 <p className=" text-base font-light ">Se divirta com os principais eventos da Faculdade Unicentoma</p>
             </div>
-            <div className=" grid grid-cols-3 gap-4 mb-4 ">
+            <div className=" grid lg:grid-cols-3 gap-4 mb-4 grid-cols-1">
                 {secondary.map((events: any, index: any) => (
                     <div className="" key={index}>
                         <BannerSecondary events={events}/>

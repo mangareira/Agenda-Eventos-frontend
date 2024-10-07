@@ -8,7 +8,7 @@ export const Pagination = ({page, limit, total, classNameDiv}: IPagination) => {
     const seachParams = useSearchParams()
     const {pages, isCurrentPage} =  usePagination({page,limit,total})   
     const generateUrl = (page: number) => {
-        const params = new URLSearchParams(seachParams)
+        const params = new URLSearchParams(String(seachParams))
         params.set("page", page.toString())
         const url = `${pathName}?${params.toString()}`
         return url

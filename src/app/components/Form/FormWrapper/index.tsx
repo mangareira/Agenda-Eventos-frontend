@@ -34,19 +34,23 @@ export const FormWrapper = ({price, eventId, cupom,setState }: any) => {
         
     }, [value])
     const onSubmit = async(data: IParticipants) => {
-               
-        if(price === '') {
-            const add = await onSubmitParticipants({...data, valor:'', tickets: String(value), discount}, eventId)            
-            setState(add)
-            const id =  localStorage.getItem('user')
-            //router.push(`/event-details/${eventId}/participant/${id}`) 
-        }else {            
-            const result = await onSubmitParticipants({...data, valor: String(priceValue), tickets: String(value), discount,}, eventId) 
-            const id =  localStorage.getItem('user')
-            if(result.status === 200){
-                router.push(`/event-details/${eventId}/participant/${id}`)
+        if (value <= 0) {
+            toast.error('O número de ingressos deve ser maior que 0.');
+            return;
+        }
+
+        if (price === '') {
+            const add = await onSubmitParticipants({ ...data, valor: '', tickets: String(value), discount }, eventId);
+            setState(add);
+            const id = localStorage.getItem('user');
+            // router.push(`/event-details/${eventId}/participant/${id}`)
+        } else {
+            const result = await onSubmitParticipants({ ...data, valor: String(priceValue), tickets: String(value), discount }, eventId);
+            const id = localStorage.getItem('user');
+            if (result.status === 200) {
+                router.push(`/event-details/${eventId}/participant/${id}`);
             }
-        }                 
+        }               
     }
     const applyCupom = () => {
         const priceNumber = Number(price.split(',')[0] + '.' + price.split(',')[1])
