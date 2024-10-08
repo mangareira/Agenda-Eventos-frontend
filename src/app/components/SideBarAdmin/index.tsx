@@ -6,6 +6,9 @@ import { MdLogout } from "react-icons/md"
 import { useEvents } from "@/app/utils/hooks/useEvents"
 import { useUserUnique } from "@/app/utils/hooks/useUserUnique"
 import { AiOutlineLoading } from "react-icons/ai"
+import { BsBack } from "react-icons/bs"
+import { FaBackward } from "react-icons/fa6"
+import Link from "next/link"
 
 export const SideBarAdmin = () => {
     const token = useEvents()
@@ -39,6 +42,12 @@ export const SideBarAdmin = () => {
                 <MdLogout/>
                 Logout
             </button>
+            <Link href={"/"}>
+                <button className="p-5 mx-[5px] my-0 flex items-center gap-[10px] cursor-pointer rounded-[10px] w-full hover:bg-hover_admin ">
+                    <FaBackward/>
+                    Pagina principal
+                </button>
+            </Link>
         </div>
     )
 }

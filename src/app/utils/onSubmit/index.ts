@@ -86,6 +86,11 @@ export const onSubimtAddParticipantWithEmail = async (data: IEmail, eventId: str
     return response 
 }
 export const onSubmitExport = async (data: IExport) => {
+    let tokenLoc
+    if (typeof window !== 'undefined'){
+        const token = localStorage.getItem('token');            
+        tokenLoc = token
+    }   
     try {
         // Formatar as datas
         const startDate = new Date(data.startDate).toISOString();
@@ -95,7 +100,8 @@ export const onSubmitExport = async (data: IExport) => {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events/exports`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${tokenLoc}`
             },
             body: JSON.stringify({ ...data, startDate, endDate })
         });

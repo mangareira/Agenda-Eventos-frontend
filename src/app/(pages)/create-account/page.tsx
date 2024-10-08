@@ -24,7 +24,7 @@ export default function login() {
                 <div className="mb-8">
                     <form onSubmit={handleSubmit(submit)}>
                         <div className="mb-6">
-                            <Input title="Nome" placeholder="Insira o seu nome" type="text" 
+                            <Input title="Nome" placeholder="Insira o seu nome completo" type="text" 
                             {...register('name')}
                             />
                         </div>
