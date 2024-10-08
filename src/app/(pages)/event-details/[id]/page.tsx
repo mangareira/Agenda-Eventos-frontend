@@ -85,7 +85,7 @@ export default function EventDetailsPage({params}: {params: {id: string}}) {
                     }
                 </div>
                 <div className="">
-                    <FormWrapper price={data.price[0]?.amount} eventId={params.id} cupom={data.coupons[0]} setState={setState}/>
+                    <FormWrapper price={data.price[0]?.amount} eventId={params.id} cupom={data.coupons[0]} setState={setState} date={data.date}/>
                 </div>
             </div>
         </div>

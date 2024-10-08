@@ -10,18 +10,21 @@ import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 import { useRouter } from "next/navigation"
 import { LoginError } from "../../LoginError"
+import dayjs from "dayjs"
 
-export const FormWrapper = ({price, eventId, cupom,setState }: any) => {
+export const FormWrapper = ({price, eventId, cupom,setState, date }: any) => {
     
     const {register, handleSubmit, formState: {errors}} = useForm<IParticipants>()
     const [value, setValue] = useState(0)
     const [input, setInput] = useState('')
     const [discount, setDiscount] = useState('Not discount')
     const [priceValue, setPriceValue] = useState<string>(price)
+    const [disable, setDisable] = useState<boolean>(false)
     
     
     
     const router = useRouter()
+    if(dayjs(new Date()).isBefore()) setDisable(true)
 
     useEffect(() => {
         if(price === '') {
@@ -38,7 +41,7 @@ export const FormWrapper = ({price, eventId, cupom,setState }: any) => {
             toast.error('O número de ingressos deve ser maior que 0.');
             return;
         }
-
+        if(disable) toast.error("O evento ja esta encerrado")
         if (price === '') {
             const add = await onSubmitParticipants({ ...data, valor: '', tickets: String(value), discount }, eventId);
             setState(add);
@@ -87,7 +90,7 @@ export const FormWrapper = ({price, eventId, cupom,setState }: any) => {
                 </form>
                     <Button title="Aplicar Cupom" onClick={applyCupom} className="mb-6"/>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <Button title="Cadastrar" />
+                    <Button title={`${disable ? "O evento ja encerrou" : "Cadastrar"}`} className={disable ? "cursor-not-allowed bg-blue-600 text-gray-100": "cursor-pointer"} disable={disable} />
                 </form>
                 </div>
             </div>
