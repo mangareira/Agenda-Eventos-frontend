@@ -24,9 +24,10 @@ export const FormWrapper = ({price, eventId, cupom,setState, date }: any) => {
     
     
     const router = useRouter()
-    if(dayjs(new Date()).isBefore()) setDisable(true)
-
+    
+    
     useEffect(() => {
+        if(dayjs(new Date()).isAfter(new Date(date))) setDisable(true)
         if(price === '') {
             setPriceValue('gratis')
         }else {
