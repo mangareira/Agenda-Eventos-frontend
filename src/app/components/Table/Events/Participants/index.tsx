@@ -3,11 +3,12 @@ import { IQuery } from '@/app/utils/interface'
 import Pagination from '@/app/components/DashBoard/pagination'
 import { TableParticipants } from '@/app/components/TableEvents/TableParticipants'
 import { useParticipantsList } from '@/app/utils/hooks/useParticipantsList'
+import dayjs from 'dayjs'
 
 
 export const TableParticipantPage = ({q, page, id}:IQuery ) => {
-    const {users, count, deleteParticipantsFromState} = useParticipantsList(q,page,id)
-    
+    const {users, count, deleteParticipantsFromState, event} = useParticipantsList(q,page,id)
+
     return (
     <div>
         <table className="w-full" > 
@@ -17,8 +18,8 @@ export const TableParticipantPage = ({q, page, id}:IQuery ) => {
                     <td className="p-2.5">Email</td>
                     <td className="p-2.5">Created At</td>
                     <td className="p-2.5">Role</td>
-                    <td className="p-2.5">Status</td>
                     <td className="p-2.5">Action</td>
+                    {dayjs(new Date()).isAfter(event?.date) ? <td className='p-2.5'>Confirmação</td>: null}
                 </tr>
             </thead>
             <tbody>
