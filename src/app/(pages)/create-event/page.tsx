@@ -78,19 +78,31 @@ export default  function CreateEvent() {
                             type="text" 
                             {...register("cupom")}
                         />
-                        <div className="grid grid-cols-2 gap-3">
+                        <div className="grid grid-cols-2 grid-rows-2 gap-3">
                             <Input 
-                                title="Data" 
+                                title="Data de inicio" 
                                 placeholder="dd/mm/aaaa" 
                                 type="Date" 
                                 {...register("date")}
-                                />
+                            />
                             <Input 
                                 title="Horário" 
                                 placeholder="hh:mm" 
                                 type="time" 
                                 {...register("time")}
-                                />
+                            />
+                            <Input 
+                                title="Data final" 
+                                placeholder="dd/mm/aaaa" 
+                                type="Date" 
+                                {...register("finalDate")}
+                            />
+                            <Input 
+                                title="Carga horaria" 
+                                placeholder="00" 
+                                type="text" 
+                                {...register("hours")}
+                            />
                         </div>
                         <p className="text-blue text-base font-medium mb-4" >Categoria do Evento</p>
                         <div className="grid grid-cols-4 gap-2 ">

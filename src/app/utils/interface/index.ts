@@ -22,6 +22,8 @@ export interface IFormProps {
     categories: string
     banner: File
     map: File
+    finalDate: string
+    hours: string
 }
 export interface IParticipants {
     valor: string

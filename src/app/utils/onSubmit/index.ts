@@ -7,11 +7,14 @@ import { IEmail } from "@/app/(admin)/dashboard/events/[id]/participant/add/page
 
 export const onSubmitCreate = async (data: IFormProps, flyers: any) => {    
     if(!data.date && !data.time) return 'use uma data valida'  
-    const newDate = new Date(`${data.date}T${data.time}`).toISOString()        
+    const newDate = new Date(`${data.date}T${data.time}`).toISOString()  
+    const finalDate =  new Date(data.finalDate).toISOString()
     const formData = new FormData()      
     formData.append('title', data.title)
     formData.append('coupons', data.cupom)      
-    formData.append('date', newDate)      
+    formData.append('date', newDate) 
+    formData.append('finalDate', finalDate)
+    formData.append('hours', data.hours)     
     formData.append('location[latitude]', data.latitude)   
     formData.append('location[longitude]', data.longitude)
     formData.append('price[amount]', data.price)         
