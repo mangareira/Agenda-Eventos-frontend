@@ -115,7 +115,7 @@ export default  function CreateEvent() {
                         </div>
                         <div className="mt-4">
                             <p className="text-base font-medium text-blue" >Valor</p>
-                            <p className="text-neutral-500 text-sm font-light ">Caso seu evento seja gratuito, o campo deverá ficar em vazio. Caso haja mais de um setor, basta adicionar a seção. Se houver um cupom promocional, basta colocar o código no campo "cupom"</p>
+                            <p className="text-neutral-500 text-sm font-light ">Caso seu evento seja gratuito, o campo deverá ficar em vazio. Caso haja mais de um setor, basta adicionar a seção. Se houver um cupom promocional, basta colocar o código no campo "cupom". Se o evento não tiver limit deixo o campo de vagas vazio.</p>
                         </div>
                         <div className="grid grid-cols-5 gap-2">
                             <Input 
@@ -131,6 +131,13 @@ export default  function CreateEvent() {
                                 type="text" 
                                 className="col-span-3"
                                 {...register("sector")}
+                            />
+                            <Input 
+                                title="Vagas" 
+                                placeholder="Insira a quantidade de vagas" 
+                                type="text" 
+                                className="col-span-5"
+                                {...register("limit")}
                             />
                         </div>
                         <Input 

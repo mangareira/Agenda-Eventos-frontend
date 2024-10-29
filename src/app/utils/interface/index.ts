@@ -23,7 +23,8 @@ export interface IFormProps {
     banner: File
     map: File
     finalDate: string
-    hours: string
+    hours: string,
+    limit: number,
 }
 export interface IParticipants {
     valor: string

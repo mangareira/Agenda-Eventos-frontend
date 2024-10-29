@@ -46,7 +46,7 @@ export default function login() {
                     </div>
                     <div className="text-center ">
                         <span className="text-gray-600">Não está inscrito?</span>
-                        <Link href="/cadastro">
+                        <Link href="/create-account">
                             <div className="ml-1 text-blue hover:text-blue-600 font-semibold ">
                                 Se inscreva
                             </div>
