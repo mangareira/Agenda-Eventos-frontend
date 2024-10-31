@@ -24,7 +24,7 @@ export const TableParticipantPage = ({q, page, id}:IQuery ) => {
             </thead>
             <tbody>
                 {users?.map((user, index) => (
-                    <TableParticipants users={user} key={index} deleteUserFromState={deleteParticipantsFromState} eventId={id}/>
+                    <TableParticipants users={user} key={index} deleteUserFromState={deleteParticipantsFromState} eventId={id} eventDate={event?.date}/>
                 ))}
             </tbody>
         </table>

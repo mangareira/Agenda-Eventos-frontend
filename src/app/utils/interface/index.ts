@@ -94,6 +94,7 @@ export type IUsers = {
     users: IUsersPayload,
     deleteUserFromState: (id: string) => void
     eventId?: string
+    eventDate?: string
 }
 type Price = {
     amount: string

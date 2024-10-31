@@ -5,8 +5,9 @@ import Link from 'next/link'
 import React from 'react'
 import { FetchWrapper } from '@/app/utils/FetchWrapper'
 import { toast } from 'react-toastify'
+import dayjs from 'dayjs'
 
-export const TableParticipants = ({users,deleteUserFromState,eventId}: IUsers,) => {
+export const TableParticipants = ({users,deleteUserFromState,eventId, eventDate}: IUsers,) => {
     const date = new Date(users.createdAt)
     const minName = users.name.slice(0,25).toString() + '.'
     const handleDelete = (id: string) => async () => {
@@ -38,10 +39,12 @@ export const TableParticipants = ({users,deleteUserFromState,eventId}: IUsers,) 
                     <button className={`py-1 px-2.5 rounded cursor-pointer bg-red-700`} onClick={handleDelete(users._id)}>Delete</button>
                 </div>
             </td>
-            <td className='p-2.5 flex gap-2'>
-                <button  className='bg-teal-500 py-1 px-2.5 rounded cursor-pointer' onClick={handleConfirm(users._id, true, eventId)}>Sim</button>
-                <button  className='bg-teal-500 py-1 px-2.5 rounded cursor-pointer' onClick={handleConfirm(users._id, false, eventId)}>Não</button>
-            </td>
+            {dayjs(new Date()).isAfter(eventDate) ? (
+                <td className='p-2.5 flex gap-2'>
+                    <button  className='bg-teal-500 py-1 px-2.5 rounded cursor-pointer' onClick={handleConfirm(users._id, true, eventId)}>Sim</button>
+                    <button  className='bg-teal-500 py-1 px-2.5 rounded cursor-pointer' onClick={handleConfirm(users._id, false, eventId)}>Não</button>
+                </td>
+            ) : null}
         </tr>
   )
 }

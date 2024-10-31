@@ -18,6 +18,7 @@ function User({ params }: { params: { id: string } }) {
             setValue('email', user.email);
             setValue('cpf', user.cpf);
             setValue('role', user.role);
+            setValue("password", user.password)
         }
     }, [user, setValue]);
     if(!user) return <div className="absolute top-[50%] left-[45%]"><AiOutlineLoading className="animate-spin text-blue" size={30}/></div>
@@ -38,6 +39,7 @@ function User({ params }: { params: { id: string } }) {
                     <InputAdmin title='Nome' type='text' {...register('name')}/>
                     <InputAdmin title='Email' type='email'{...register('email')}/>
                     <InputAdmin title='CPF' type='text'{...register('cpf')}/>
+                    <InputAdmin title='Senha' type='text'{...register('password')}/>
                     <label htmlFor="">Is Admin</label>
                     <select id="isAdmin" {...register('role')} className='p-5 border border-solid border-green_button rounded-md-0.5 bg-hover_admin my-[10px] mx-0 placeholder:text-white '>
                         <option value="admin" selected={user?.role == "admin"}>Yes</option>
