@@ -5,25 +5,19 @@ import { FetchWrapper } from "@/app/utils/FetchWrapper";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {saveAs} from "file-saver"
+import { toast } from "react-toastify";
 
 export default function Events({searchParams, params}: {searchParams: { page: string, q: string}, params: {id: string}}) {
   const pathName =  usePathname()
   const handleList = async () => {
     try {
-      // Fetch para pegar o arquivo do backend
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events/list?id=${params.id}`, {
         method: "GET",
       });
-  
-      // Verificar se a resposta foi bem-sucedida
       if (!response.ok) {
         throw new Error("Erro ao baixar o arquivo");
       }
-  
-      // Pegar os dados do arquivo como um blob
       const blob = await response.blob();
-  
-      // Criar o download do arquivo
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
@@ -31,12 +25,17 @@ export default function Events({searchParams, params}: {searchParams: { page: st
       document.body.appendChild(a);
       a.click();
       a.remove();
-  
-      // Revogar a URL para liberar a memória
       window.URL.revokeObjectURL(url);
     } catch (error) {
       console.error("Erro ao baixar a lista de presença:", error);
     }
+  }
+  const onConfirmAll = async () => {
+    const response = await FetchWrapper(`/events/confirm-all/${params.id}`, "POST")
+    if(response?.response?.data?.status == 400) {
+      toast.error(response?.response?.data?.message)
+    }
+    toast.success(response.data.message)
   }
   return (
     <div className="rounded-xl-0.5 bg-green_admin p-5 mt-5 text-white">
@@ -46,7 +45,8 @@ export default function Events({searchParams, params}: {searchParams: { page: st
           <Link href={`${pathName}/add`} >
             <button className="p-2.5 bg-green_button rounded-md-0.5 cursor-pointer mr-4">Add new participant</button>
           </Link>
-          <button className="p-2.5 bg-green_button rounded-md-0.5 cursor-pointer" onClick={handleList}>Lista de participantes</button>
+          <button className="p-2.5 bg-green_button rounded-md-0.5 cursor-pointer mr-4" onClick={handleList}>Lista de participantes</button>
+          <button className="p-2.5 bg-green_button rounded-md-0.5 cursor-pointer" onClick={onConfirmAll}>Confirma todos</button>
         </div>
       </div>
       <div className="">
