@@ -1,6 +1,5 @@
 import { deleteEvent } from '@/app/utils/delete/event'
 import { IEvents } from '@/app/utils/interface'
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
@@ -26,7 +25,7 @@ export const TableEvents = ({events, deleteEventFromState}: IEvents) => {
                     {minName}
                 </div>
             </td>
-            <td className="p-2.5">{events.description}</td>
+            <td className="p-2.5">{events.description.slice(0, 40)}.</td>
             <td className="p-2.5">{price()}</td>
             <td className="p-2.5">{date.toString().slice(4,16)}</td>
             <td className="p-2.5">{events.participants.length}</td>

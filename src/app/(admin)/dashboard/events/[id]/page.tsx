@@ -40,7 +40,7 @@ function Event({ params, searchParams }: { params: { id: string }, searchParams:
             <div className='flex gap-12 mt-5 text-white' >
                 <div className="flex-[1] bg-green_admin p-5 rounded-xl-0.5 font-bold h-max ">
                     <div className="w-full h-72 relative rounded-xl-0.5 overflow-hidden mb-5">
-                        <div style={{ backgroundImage:  `url(${banner})`}} className='w-full h-[280px] relative rounded-3xl shadow bg-cover bg-center'/>
+                        <div style={{ backgroundImage:  `url(${banner})`}} className='w-full h-[280px] relative rounded-3xl shadow bg-contain bg-center bg-no-repeat'/>
                     </div>
                     {event?.title}
                 </div>

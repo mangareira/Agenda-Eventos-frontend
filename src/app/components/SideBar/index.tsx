@@ -34,12 +34,6 @@ export const SideBar = () => {
                             <span>Home</span>
                         </div>
                     </Link>
-                    <Link href={'/maps'}>
-                        <div className="flex flex-col cursor-pointer justify-center items-center mb-9">
-                            <LiaMapMarkedSolid size={30}/>
-                            <span>Mapa</span>
-                        </div>
-                    </Link>
                     {adminAccess()}
                     <Link href={'/filter-events'}>
                         <div className="flex flex-col cursor-pointer justify-center items-center mb-9">
