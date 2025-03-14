@@ -19,7 +19,6 @@ export const CardSubs = ({eventId}: any) => {
     if(!data && !status) return <div className="absolute top-[50%] left-[45%]"><AiOutlineLoading className="animate-spin text-blue" size={30}/></div>
     const handlePush = async() => {
         const response = await FetchWrapper(`/events/new-pix/${data?.payment.txid}`,'POST')
-        console.log(response, data);
         
         router.push(`${pathName}/new-pix?txid=${response.data.payment.txid}`)
     }
@@ -47,8 +46,12 @@ export const CardSubs = ({eventId}: any) => {
                 </div>
             </div>
             <div className="lg:w-[460px] w-full mt-5">
-                <div className="flex mx-3">
-                    <Button title="Cancelar inscrição" className="mr-3 text-blue bg-white border border-blue max-sm:px-0" onClick={handleCancelled}/>
+                <div className={`flex mx-3 ${data?.payment.status === "Pago" ? "flex-1": ""}`}>
+                    <Button 
+                        title="Cancelar inscrição" 
+                        className={`mr-3 text-blue bg-white border border-blue max-sm:px-0 ${data?.payment.status === "Pago" ? "hidden": ""}`}
+                        onClick={handleCancelled} 
+                        disable={data?.payment.status === "Pago"}/>
                     {status ?
                         <Button title="gerar novo pix" className="ml-3" onClick={handlePush}/>
                     :

@@ -18,7 +18,11 @@ export default function PaymentPage({ params }: { params: { participantid: strin
 
       try {
         const response = await FetchWrapper('/events/findparticipants/' + params.participantid, 'GET');
-        setQrCode(response.data.payment.qrCode);
+        let qrCodeData = response.data.payment.qrCode;
+        if (!qrCodeData.startsWith('data:image/')) {
+          qrCodeData = `data:image/png;base64,${qrCodeData}`;
+        }
+        setQrCode(qrCodeData);
         setPaymentValue(response.data.payment.valor);
         setPixCopiaECola(response.data.payment.pixCopiaECola);
       } catch (error) {

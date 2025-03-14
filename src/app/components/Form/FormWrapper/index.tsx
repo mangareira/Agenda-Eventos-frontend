@@ -15,7 +15,7 @@ import dayjs from "dayjs"
 export const FormWrapper = ({price, eventId, cupom,setState, date }: any) => {
     
     const {register, handleSubmit, formState: {errors}} = useForm<IParticipants>()
-    const [value, setValue] = useState(0)
+    const [value, setValue] = useState(1)
     const [input, setInput] = useState('')
     const [discount, setDiscount] = useState('Not discount')
     const [priceValue, setPriceValue] = useState<string>(price)
@@ -79,17 +79,17 @@ export const FormWrapper = ({price, eventId, cupom,setState, date }: any) => {
                 <div className="p-6">
                 <form onSubmit={handleSubmit(onSubmit)}>
                 <PriceWrapper value={value} setValue={setValue} />
-                        <div className="grid grid-cols-5 gap-3 mt-3 ">
-                            <Input 
-                                placeholder="Insira aqui um cupom de desconto" 
-                                title="Cupom" type="text" 
-                                className="col-span-3" 
-                                onChange={(e: any) =>setInput(e.target.value)}
-                            /> 
-                            <Input  title="Subtotal" type="text" className="col-span-2" {...register('valor')} value={priceValue} /> 
-                        </div>
+                <div className="grid grid-cols-5 gap-3 mt-3 ">
+                    <Input 
+                        placeholder="Insira aqui um cupom de desconto" 
+                        title="Cupom" type="text" 
+                        className="col-span-3" 
+                        onChange={(e: any) =>setInput(e.target.value)}
+                    /> 
+                    <Input  title="Subtotal" type="text" className="col-span-2" {...register('valor')} value={priceValue} /> 
+                </div>
                 </form>
-                    <Button title="Aplicar Cupom" onClick={applyCupom} className="mb-6"/>
+                    <Button title="Aplicar Cupom" onClick={applyCupom} className={`mb-6 ${cupom === "" ? "bg-blue-600 cursor-not-allowed": ""}`} disable={cupom === "" ? true: false}/>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Button title={`${disable ? "O evento ja encerrou" : "Cadastrar"}`} className={disable ? "cursor-not-allowed bg-blue-600 text-gray-100": "cursor-pointer"} disable={disable} />
                 </form>

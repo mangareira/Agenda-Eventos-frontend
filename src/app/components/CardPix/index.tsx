@@ -7,7 +7,10 @@ import { AiOutlineLoading } from "react-icons/ai"
 export const CardPix = ({txid}: any) => {  
     const {data} = usePaymentHook(txid)
     if(!data) return <div className="absolute top-[50%] left-[45%]"><AiOutlineLoading className="animate-spin text-blue" size={30}/></div>
-    const qrcode = data?.payment.qrCode 
+    let qrcode = data.payment.qrCode;
+    if (!qrcode.startsWith('data:image/')) {
+      qrcode = `data:image/png;base64,${qrcode}`;
+    }
     const pix = data?.payment.pixCopiaECola.slice(0,40).toString() + '...'
     const pixCola: any = data?.payment.pixCopiaECola
     const handleCopy = () => {
