@@ -43,8 +43,9 @@ export default function PaymentPage({ params }: { params: { participantid: strin
     <div className="container mx-auto">
         <div className="py-2">
             <div className="text-blue">
-                <div className="font-medium text-2xl">Detalhe do pagemento</div>
+                <div className="font-medium text-2xl">Detalhe do pagamento</div>
                 <div className="font-light text-sm">Aqui podera ver os detalhes do pix</div>
+                <div className="font-light text-sm">Quando confirmar seu pagamento espere alguns minutos para validar</div>
                 <div className="container mx-auto">
                     <div className="h-[77vh]">
                         <div className="flex flex-col items-center w-full">

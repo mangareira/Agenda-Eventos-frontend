@@ -42,6 +42,7 @@ export const FormWrapper = ({price, eventId, cupom,setState, date }: any) => {
             toast.error('O número de ingressos deve ser maior que 0.');
             return;
         }
+        if(!localStorage.getItem("user")) toast.error("Faço o login ou se cadastre para se inscrever no evento")
         if(disable) toast.error("O evento ja esta encerrado")
         if (price === '') {
             const add = await onSubmitParticipants({ ...data, valor: '', tickets: String(value), discount }, eventId);

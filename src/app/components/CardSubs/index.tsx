@@ -18,7 +18,7 @@ export const CardSubs = ({eventId}: any) => {
     }  
     if(!data && !status) return <div className="absolute top-[50%] left-[45%]"><AiOutlineLoading className="animate-spin text-blue" size={30}/></div>
     const handlePush = async() => {
-        const response = await FetchWrapper(`/events/new-pix/${data?.payment.txid}`,'POST')
+        const response = await FetchWrapper(`/events/get-pay/${data?.payment.txid}`,'GET')
         
         router.push(`${pathName}/new-pix?txid=${response.data.payment.txid}`)
     }
@@ -39,7 +39,7 @@ export const CardSubs = ({eventId}: any) => {
                     </div>
                     <div className="text-blue mx-8 text-center">
                         {status ?
-                            <div className="font-light text-2xl">Falta o pagamento para confirmar sua inscrição no evento</div> :
+                            <div className="font-light text-2xl">Seu pagamento esta sendo processado, espere um pouco :)</div> :
                             <div className="font-light text-2xl">Sua inscrição no evento está confirmada</div>
                         }
                     </div>
@@ -52,11 +52,9 @@ export const CardSubs = ({eventId}: any) => {
                         className={`mr-3 text-blue bg-white border border-blue max-sm:px-0 ${data?.payment.status === "Pago" ? "hidden": ""}`}
                         onClick={handleCancelled} 
                         disable={data?.payment.status === "Pago"}/>
-                    {status ?
-                        <Button title="gerar novo pix" className="ml-3" onClick={handlePush}/>
-                    :
-                        <Button title="imprimir comprovante" className="ml-3"/>
-                    }
+                    {data?.payment.status  === "Pago" && <Button title="imprimir comprovante" className="ml-3"/>}
+                    {data?.payment.status  === "Pendente" && <Button title="Rever QrCode do pix" className="ml-3" onClick={handlePush}/>}
+                    {data?.payment.status  === "cancelled" && <Button title="imprimir comprovante" className="ml-3"/>}
                 </div>
             </div>
         </>
