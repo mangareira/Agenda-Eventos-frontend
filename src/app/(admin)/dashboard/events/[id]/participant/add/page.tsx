@@ -44,7 +44,7 @@ export default function AddParticipant({params}: {params :{ id: string}}) {
             <option value="" defaultValue={""}>
              Tem desconto ?
             </option>
-            <option value="iscount">Sim</option>
+            <option value="Discount">Sim</option>
             <option value="not discount">Não</option>
           </select>
           </div>
