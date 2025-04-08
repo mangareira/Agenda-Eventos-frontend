@@ -27,7 +27,7 @@ export default function login() {
                 <div className="mb-8">
                     <form onSubmit={handleSubmit(submit)}>
                     <div className="mb-6">
-                        <Input title="Email" placeholder="Insira o seu email" type="text" 
+                        <Input title="Email" placeholder="Insira o seu email" type="email" 
                         {...register('email')}
                         />
                     </div>
