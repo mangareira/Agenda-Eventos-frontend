@@ -28,7 +28,7 @@ export const FormWrapper = ({price, eventId, cupom,setState, date }: any) => {
     
     useEffect(() => {
         if(dayjs(new Date()).isAfter(new Date(date))) setDisable(true)
-        if(price === '') {
+        if(price === '' || priceValue === 'gratis') {
             setPriceValue('gratis')
         }else {
             const priceNumber = Number(price.split(',')[0] + '.' + price.split(',')[1])
@@ -44,7 +44,7 @@ export const FormWrapper = ({price, eventId, cupom,setState, date }: any) => {
         }
         if(!localStorage.getItem("user")) toast.error("Faço o login ou se cadastre para se inscrever no evento")
         if(disable) toast.error("O evento ja esta encerrado")
-        if (price === '') {
+        if (price === '' || priceValue === "gratis") {
             const add = await onSubmitParticipants({ ...data, valor: '', tickets: String(value), discount }, eventId);
             setState(add);
             const id = localStorage.getItem('user');
@@ -62,8 +62,7 @@ export const FormWrapper = ({price, eventId, cupom,setState, date }: any) => {
         const priceInt = String(value * priceNumber)
         
         if(input === cupom) {
-            const discount =  85/100 * Number(priceInt) 
-            setPriceValue(String(discount))
+            setPriceValue("gratis")
             setDiscount('Discount')
             toast.success('Cupom aplicado')
         } else {
