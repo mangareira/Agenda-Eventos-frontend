@@ -153,24 +153,9 @@ export default  function CreateEvent() {
                         <p className="text-blue text-base font-light" >Crie sue próprio evento da maneira que você preferir :)</p>
                         <div className="my-4">
                             <p className="text-blue text-base font-medium">Banner</p>
-                            <p className="text-neutral-500 text-sm font-light ">Insira um banner no formato 336x280</p>
+                            <p className="text-neutral-500 text-sm font-light ">Insira um banner no formato 1440x280</p>
                             <div className="w-full h-28 bg-zinc-300 rounded-3xl shadow">
                                 <InputFile {...register("banner")} onChange={(e: any) => handleFileChange('banner', e)} />
-                            </div>
-                        </div>
-                        <div className="my-4">
-                            <p className="text-blue text-base font-medium">Flyers</p>
-                            <p className="text-neutral-500 text-sm font-light ">Insira ate três flyers</p>
-                            <div className="grid  grid-cols-3 gap-2">
-                                <div className="w-full h-28 bg-zinc-300 rounded-3xl shadow">
-                                    <InputFile  onChange={(e: any) => handleFileChange('flyers', e)}/>
-                                </div>
-                                <div className="w-full h-28 bg-zinc-300 rounded-3xl shadow">
-                                    <InputFile onChange={(e: any) => handleFileChange('flyers', e)}/>
-                                </div>
-                                <div className="w-full h-28 bg-zinc-300 rounded-3xl shadow">
-                                    <InputFile  onChange={(e: any) => handleFileChange('flyers', e)}/>
-                                </div>
                             </div>
                         </div>
                         <Button title="Cadastrar Evento" className="" />
