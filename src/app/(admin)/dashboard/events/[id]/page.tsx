@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form'
 import { AiOutlineLoading } from 'react-icons/ai'
 import { toast } from 'react-toastify'
 import { onSendCertificate } from '../../../../utils/onSubmit'
+import QRCodeDownloader from '@/app/components/QrcodeDownload'
 
 function Event({ params, searchParams }: { params: { id: string }, searchParams: { modal: string } }) {
     const {event, updateEvent} = useGetEvent(params.id)
@@ -57,7 +58,7 @@ function Event({ params, searchParams }: { params: { id: string }, searchParams:
                         <InputAdmin title='Setor' type='text' placeholder={event?.price[0].sector || ""} {...register('price.0.sector')}/>
                         <button className='w-full p-5 bg-green_button rounded-md-0.5 cursor-pointer hover:bg-hover_admin text-base mt-5'>Update</button>
                     </form>
-                    <div className="flex grid-rows-2 gap-1">
+                    <div className="flex grid-rows-3 gap-1">
                         <Link href={`/dashboard/events/${event._id}/participant`} 
                             className='w-full p-5 bg-green_button rounded-md-0.5 cursor-pointer hover:bg-hover_admin text-base mt-5 text-center'     
                         >
@@ -67,6 +68,10 @@ function Event({ params, searchParams }: { params: { id: string }, searchParams:
                             className='w-full p-5 bg-green_button rounded-md-0.5 cursor-pointer hover:bg-hover_admin text-base mt-5'
                             onClick={sendCertficates}
                             >Enviar certificados</button>
+                        <QRCodeDownloader
+                            url={`${process.env.NEXT_PUBLIC_FRONTEND_URL}/event-details/${event._id}/confirmation-presence`}
+                            fileName={`qrcode-${event._id}.png`}
+                        />
                     </div>
                 </div>
             </div>

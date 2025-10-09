@@ -4,7 +4,7 @@ import { useEvents } from "@/app/utils/hooks/useEvents"
 import { useRole } from "@/app/utils/hooks/useRole"
 import Link from "next/link"
 import { AiOutlineHome } from "react-icons/ai"
-import { BsPersonAdd, BsQuestionCircle, BsSignIntersection } from "react-icons/bs"
+import { BsPersonAdd, BsQrCodeScan, BsQuestionCircle, BsSignIntersection } from "react-icons/bs"
 import { FiFilter, FiLogIn } from "react-icons/fi"
 import { LiaMapMarkedSolid } from "react-icons/lia"
 import { MdDomainVerification, MdOutlineAddBox, MdOutlinePrivacyTip } from "react-icons/md"
@@ -67,15 +67,12 @@ export const SideBar = () => {
                             <span>Verificação de certificado</span>
                         </div>
                     </Link>
-                    <div className="flex flex-col cursor-pointer justify-center items-center mb-9">
-                        <BsQuestionCircle size={30}/>
-                        <span>SAC</span>
-                    </div>
-                    <div className="flex flex-col cursor-pointer justify-center items-center mb-9">
-                        <MdOutlinePrivacyTip size={30}/>
-                        <span>Privacidade</span>
-                    </div>
-                    
+                    <Link href={'/qrcode'} className="lg:hidden">
+                        <div className="flex flex-col cursor-pointer justify-center items-center mb-9">
+                            <BsQrCodeScan size={30}/>
+                            <span>QrCode</span>
+                        </div>
+                    </Link>
                 </div>
             </div>
         </>
