@@ -16,7 +16,7 @@ export default function ConfirmationPresencePage() {
 
     const response = await FetchWrapper(`/events/confirm-precense/${id}`, "POST", { email })
 
-    if (response.ok) {
+    if (response.status == 200) {
       setMessage("Presença confirmada com sucesso! ✅")
     } else {
       setMessage("Erro ao confirmar presença. Tente novamente.")
