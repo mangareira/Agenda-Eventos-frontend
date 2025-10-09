@@ -14,7 +14,7 @@ export default function ConfirmationPresencePage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    const response = await FetchWrapper(`/events/confirm-presence/${id}`, "POST", { email })
+    const response = await FetchWrapper(`/events/confirm-precense/${id}`, "POST", { email })
 
     if (response.ok) {
       setMessage("Presença confirmada com sucesso! ✅")
