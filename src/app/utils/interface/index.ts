@@ -40,6 +40,7 @@ export interface IAccount {
     email: string
     cpf: string
     password: string
+    phone?: string
     role?: string
 }
 export interface IAccountPayload{
@@ -47,6 +48,7 @@ export interface IAccountPayload{
     email: string
     cpf: string
     password: string
+    phone?: string
     role: string
 }
 export type IPagination = {
@@ -88,6 +90,7 @@ export interface IUsersPayload {
     password: string
     eventos: string[]
     role: string
+    phone?: string
     createdAt: string
 }
 export type IUsers = {

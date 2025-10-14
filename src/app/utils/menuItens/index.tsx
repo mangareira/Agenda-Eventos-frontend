@@ -9,34 +9,19 @@ export const menuItems = [
             icon: <MdDashboard />,
           },
           {
-            title: "Users",
+            title: "Usuarios",
             path: "/dashboard/users",
             icon: <MdSupervisedUserCircle />,
           },
           {
-            title: "Events",
+            title: "Eventos",
             path: "/dashboard/events",
             icon: <MdEventNote />,
           },
           {
-            title: "Transactions",
+            title: "Transações",
             path: "/dashboard/transactions",
             icon: <MdAttachMoney />,
-          },
-        ],
-      },
-      {
-        title: "User",
-        list: [
-          {
-            title: "Settings",
-            path: "/dashboard/settings",
-            icon: <MdOutlineSettings />,
-          },
-          {
-            title: "Help",
-            path: "/dashboard/help",
-            icon: <MdHelpCenter />,
           },
         ],
       },

@@ -79,7 +79,7 @@ export const NavBar = () => {
                     </ul>
                 )}
             </div>
-            <div className="lg:ml-[4rem]">
+            <div className="lg:ml-[2rem]">
                 {!isLoggedIn ? (
                     <>  
                         <div className="sm:hidden ml-[4rem]">

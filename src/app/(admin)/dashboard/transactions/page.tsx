@@ -7,7 +7,7 @@ export default function TransactionsPage({searchParams}: {searchParams: { page: 
     return(
         <div className="rounded-xl-0.5 bg-green_admin p-5 mt-5 text-white ">
             <div className="flex items-center justify-between">
-                <Search placeholder="Search for a transcastion..."/>
+                <Search placeholder="Pesquisar por transações..."/>
             </div>
             <TableTransPage page={Number(searchParams.page)} q={searchParams.q} />
         </div>

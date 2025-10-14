@@ -34,7 +34,6 @@ export default function EventDetailsPage({params}: {params: {id: string}}) {
             style={{backgroundImage: `url(${image})`}} 
             >
                 <div className="p-5 text-blue lg:absolute lg:bottom-0">
-                    <h3 className="lg:text-5xl pb-4 font-bold text-xl">{data.title}</h3>
                     <div className="lg:flex">
                         <div className="lg:mr-4  flex lg:mb-0">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

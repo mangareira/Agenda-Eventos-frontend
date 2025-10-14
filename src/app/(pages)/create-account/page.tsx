@@ -39,6 +39,12 @@ export default function login() {
                             />
                             <h1 className="font-light text-gray-300 text-sm">Ex: 12345678901</h1>
                         </div>
+                        <div className="mb-2">
+                            <Input title="Telefone" placeholder="Insira o seu Telefone" type="text" 
+                            {...register('phone')}
+                            />
+                            <h1 className="font-light text-gray-300 text-sm">Ex: 99987654321</h1>
+                        </div>
                         <div className="mb-6">
                             <Input title="Senha" placeholder="Insira sua senha" type="password" 
                             {...register('password')}

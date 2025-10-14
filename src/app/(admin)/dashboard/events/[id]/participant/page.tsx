@@ -40,7 +40,7 @@ export default function Events({searchParams, params}: {searchParams: { page: st
   return (
     <div className="rounded-xl-0.5 bg-green_admin p-5 mt-5 text-white">
       <div className="flex items-center justify-between">
-        <Search placeholder="Search for a event..."/>
+        <Search placeholder="Pesquisar por evento..."/>
         <div className="">
           <Link href={`${pathName}/add`} >
             <button className="p-2.5 bg-green_button rounded-md-0.5 cursor-pointer mr-4">Add new participant</button>

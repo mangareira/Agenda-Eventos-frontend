@@ -39,7 +39,15 @@ export default function AddUserPage() {
           </div>
           <div className="flex flex-col">
             <InputAdmin 
-              title='password' 
+              title='Telefone' 
+              type='text' 
+              className="p-8 bg-hover_admin border border-green-400 w-full rounded-md-0.5 mb-8 "
+              {...register('phone')} 
+            />
+          </div>
+          <div className="flex flex-col">
+            <InputAdmin 
+              title='Senha' 
               type='password' 
               className="p-8 bg-hover_admin border border-green-400 w-full rounded-md-0.5 mb-8 "
               {...register('password')} 
