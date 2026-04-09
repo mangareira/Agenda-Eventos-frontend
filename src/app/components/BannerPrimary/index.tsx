@@ -8,10 +8,10 @@ export const BannerPrimary = ({events}: any) => {
     
     return (
         <Link href={`/event-details/${events._id}`}>
-            <div className="rounded py-5">
+            <div className="rounded py-5 bg-black">
                 <div className="w-full h-[280px] relative rounded-3xl shadow bg-cover bg-center" style={{ backgroundImage:  `url(${image})`}} >
-                    <div className="p-5 text-white lg:absolute lg:bottom-0">
-                        <h3 className="text-5xl pb-4 font-bold">{events.title}</h3>
+                    <div className="p-3 text-blue lg:absolute lg:bottom-0">
+                        <h3 className="text-lg p-2 rounded-md bg-white  font-bold">{events.title}</h3>
                         <div className="lg:flex">
                             <div className="lg:mr-4  flex lg:mb-0 mb-16">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
