@@ -8,7 +8,7 @@ export const BannerPrimary = ({events}: any) => {
     
     return (
         <Link href={`/event-details/${events._id}`}>
-            <div className="rounded py-5 bg-black">
+            <div className="rounded py-5">
                 <div className="w-full h-[280px] relative rounded-3xl shadow bg-cover bg-center" style={{ backgroundImage:  `url(${image})`}} >
                     <div className="p-3 text-blue lg:absolute lg:bottom-0">
                         <h3 className="text-lg p-2 rounded-md bg-white  font-bold">{events.title}</h3>
