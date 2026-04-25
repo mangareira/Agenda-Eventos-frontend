@@ -9,7 +9,7 @@ export const CardEvent = ({events, params}: any) => {
                 <div className="p-2 text-blue ">
                     <div className="font-medium">{events.title}</div>
                     <div className="font-light text-sm">{formatedAdress[0] + ',' +formatedAdress[1]}</div>
-                    <div className="font-light text-sm">{events.description}</div>
+                    <div className="font-light text-sm">{events.description?.substring(0, 120)}{events.description?.length > 120 ? '...' : ''}</div>
                     <div className="w-full text-end">
                         <div className="font-light text-sm">{date.getDate()}/{date.getMonth() + 1}/{date.getFullYear()}-{date.getHours()}h</div>
                     </div>
