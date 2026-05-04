@@ -9,7 +9,7 @@ export const BannerPrimary = ({events}: any) => {
     return (
         <Link href={`/event-details/${events._id}`}>
             <div className="rounded py-5">
-                <div className="w-full h-[280px] relative rounded-3xl shadow bg-contain bg-center" style={{ backgroundImage:  `url(${image})`}} >
+                <div className="w-full h-[280px] relative rounded-3xl shadow bg-contain bg-center bg-no-repeat" style={{ backgroundImage:  `url(${image})`}} >
                     <div className="p-2 text-blue lg:absolute lg:bottom-0">
                         {/* <h3 className="text-xl p-4 bg-white  font-bold">{events.title}</h3> */}
                         <div className="lg:flex bg-white rounded-md p-2">
