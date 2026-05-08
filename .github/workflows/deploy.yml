@@ -1,0 +1,33 @@
+name: Deploy na VM
+
+on:
+  push:
+    branches:
+      - main # ou a branch que dispara o deploy
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Conectar via SSH e atualizar
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.VM_PORT }} # opcional, padrão 22
+          script: |
+            set -e
+            cd /projetos/frontend
+
+            echo "Parando frontend..."
+            pm2 stop frontend || true   # '|| true' evita erro se não estiver rodando
+
+            echo "Atualizando código..."
+            git pull
+
+            echo "Buildando..."
+            npm run build
+
+            echo "Iniciando frontend..."
+            pm2 start frontend          # ou pm2 restart frontend se preferir
