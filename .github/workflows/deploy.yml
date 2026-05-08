@@ -29,7 +29,6 @@ jobs:
 
             cd /root/projeto/frontend
             pm2 stop frontend || true
-            git pull origin main
-            npm install
+            git pull
             npm run build
             pm2 start frontend
