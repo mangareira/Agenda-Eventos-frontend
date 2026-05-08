@@ -7,7 +7,7 @@ export const CardEvent = ({events, params}: any) => {
     return (
             <div className="lg:w-[600px] w-full h-[200px] rounded-md shadow">
                 <div className="p-2 text-blue ">
-                    <div className="font-medium">{events.title}</div>
+                    <div className="font-medium">{events.title?.substring(0,120)}{events.title?.length > 120 ? '...' : ''}</div>
                     <div className="font-light text-sm">{formatedAdress[0] + ',' +formatedAdress[1]}</div>
                     <div className="font-light text-sm">{events.description?.substring(0, 120)}{events.description?.length > 120 ? '...' : ''}</div>
                     <div className="w-full text-end">

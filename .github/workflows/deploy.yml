@@ -18,16 +18,18 @@ jobs:
           port: ${{ secrets.VM_PORT }} # opcional, padrão 22
           script: |
             set -e
-            cd $HOME/projeto/frontend
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            export PATH="$NVM_DIR/versions/node/v20.17.0/bin:$PATH"
 
-            echo "Parando frontend..."
-            pm2 stop frontend || true   # '|| true' evita erro se não estiver rodando
+            echo "Versões:"
+            node -v
+            npm -v
+            which pm2
 
-            echo "Atualizando código..."
-            git pull
-
-            echo "Buildando..."
+            cd /root/projeto/frontend
+            pm2 stop frontend || true
+            git pull origin main
+            npm install
             npm run build
-
-            echo "Iniciando frontend..."
-            pm2 start frontend          # ou pm2 restart frontend se preferir
+            pm2 start frontend
