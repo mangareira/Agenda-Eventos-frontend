@@ -16,6 +16,7 @@ export default function myEvents ({searchParams, params}: PageProps) {
     const modal = searchParams?.modal
     const [events, setEvents] = useState([])
     const [quantity, setQuantity] = useState<Number | any>()
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         const result = async () => {
@@ -23,6 +24,7 @@ export default function myEvents ({searchParams, params}: PageProps) {
             const {data} = await FetchWrapper(`/events/get-participant-events/${userId}`, 'GET', '', {page, limit})                                    
             setEvents(data.events)
             setQuantity(data.quantity)
+            setIsLoading(false)
         }
         result()
     }, [])    
@@ -43,8 +45,15 @@ export default function myEvents ({searchParams, params}: PageProps) {
     }
     
     const p = () => {
-        if(!quantity) {
+        if(isLoading) {
             return <div className="absolute top-[50%] left-[45%]"><AiOutlineLoading className="animate-spin text-blue" size={30}/></div>
+        }
+        if(quantity === 0) {
+            return <div className="flex justify-center items-center h-full">
+                <div className="text-center">
+                    <p className="text-lg text-gray-500">Você não está inscrito em nenhum evento</p>
+                </div>
+            </div>
         }
         return <Pagination limit={limit} page={page} total={quantity} classNameDiv="flex justify-center" />
     }

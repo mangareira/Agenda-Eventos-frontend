@@ -5,7 +5,7 @@ export const CardEvent = ({events, params}: any) => {
     const date = new Date(events.date)  
     
     return (
-            <div className="lg:w-[600px] w-full h-[150px] rounded-md shadow">
+            <div className="lg:w-[600px] w-full h-[250px] rounded-md shadow">
                 <div className="p-2 text-blue ">
                     <div className="font-medium">{events.title}</div>
                     <div className="font-light text-sm">{formatedAdress[0] + ',' +formatedAdress[1]}</div>
