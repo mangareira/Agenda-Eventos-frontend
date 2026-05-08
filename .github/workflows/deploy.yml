@@ -18,7 +18,7 @@ jobs:
           port: ${{ secrets.VM_PORT }} # opcional, padrão 22
           script: |
             set -e
-            cd /projeto/frontend
+            cd $HOME/projeto/frontend
 
             echo "Parando frontend..."
             pm2 stop frontend || true   # '|| true' evita erro se não estiver rodando
